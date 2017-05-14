@@ -1,8 +1,8 @@
-# web-dev-template
+# Introduction
+1. My name is Mitko Nikolov. I am an undergraduate student majoring in Computer Science. I have been already been on my first co-op. I do not have significant web development experience, and I am very excited about developing my project for the class.
 
-1. git clone https://github.com/jannunzi/web-dev-template.git
-1. cd web-dev-template
-1. npm install
-1. mongod
-1. node server.js
-1. browse to localhost:3000
+2. The purpose of this repository is to be used for work on my web development assignments and project and to share them with the Professor and the TAs.
+
+3. Root for the hosted environment in Heroku: 
+4. Link to my project: 
+5. Link to assignment: 
