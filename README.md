@@ -3,6 +3,6 @@
 
 2. The purpose of this repository is to be used for work on my web development assignments and project and to share them with the Professor and the TAs.
 
-3. Root for the hosted environment in Heroku: 
+3. Root for the hosted environment in Heroku: https://nikolov-mitko-webdev.herokuapp.com/
 4. Link to my project: 
 5. Link to assignment: 
