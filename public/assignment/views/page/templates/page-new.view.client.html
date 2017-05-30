@@ -1,0 +1,59 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-link">
+          <span class="glyphicon glyphicon-chevron-left wd-glyph-left">
+          </span>
+            </a>
+        </div>
+        <a class="navbar-brand wd-navbar" href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/new">
+            New Page
+        </a>
+        <p class="navbar-text pull-right">
+            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page" class="navbar-link">
+          <span class="glyphicon glyphicon-ok wd-glyph">
+          </span>
+            </a>
+        </p>
+    </div>
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4 hidden-xs srollable-left">
+            <ul class="list-group">
+                <li ng-repeat="page in model.pages" class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}/widget">
+                                {{page.name}}
+                            </a>
+                        </div>
+                        <div class="col-xs-4">
+                            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}">
+                                <span class="glyphicon glyphicon-cog pull-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+            <label for="name">Name</label>
+            <input id="name"
+                   class="form-control"
+                   placeholder="Blogger"
+                   type="text"/>
+
+            <label for="description">Description</label>
+            <textarea id="description"
+                      rows="5"
+                      class="form-control">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</textarea>
+        </div>
+    </div>
+</div>
+
+
+<div ng-include="'views/common/footer.view.client.html'"></div>
