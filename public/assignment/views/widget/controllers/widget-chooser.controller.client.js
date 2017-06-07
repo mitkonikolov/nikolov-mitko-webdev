@@ -13,16 +13,38 @@
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams['pageId'];
 
-        function init() {
-            model.widgets = widgetService.getAllWidgets();
-            console.log(model.widgets.length)
-        }
-        init();
+        model.widget=null;
 
+        model.createWidget = createWidget;
         model.trustThisContent = trustThisContent;
         model.getYouTubeEmbedUrl = getYouTubeEmbedUrl;
         model.getWidgetUrlForType = getWidgetUrlForType;
         model.switchTo = switchTo;
+
+        function createWidget(type) {
+            if(type==='HEADING') {
+                var new_widget = {"_id": "", "widgetType": "",
+                    "pageId": "", "size": 1, "text": "New Header"};
+            }
+            else if(type==='HTML') {
+                var new_widget = {"_id": "", "widgetType": "",
+                    "pageId": "", "text": "<p>New HTML element</p>"};
+            }
+            else {
+                var new_widget = {"_id": "", "widgetType": "",
+                    "pageId": "", "width": "100%", "url": ""};
+            }
+
+            new_widget.widgetType = type;
+            new_widget.pageId = model.pageId;
+
+            widgetService
+                .createWidget(new_widget)
+                .then(function(widg) {
+                    $location.url("/user/" + model.userId + "/website/" + model.websiteId +
+                        "/page/" + model.pageId + "/widget/" + widg._id)
+                })
+        }
 
         function getWidgetUrlForType(type) {
             return 'views/widget/templates/widget-'+type.toLowerCase()+'.view.client.html';
@@ -35,8 +57,6 @@
             embedUrl += id;
             console.log(embedUrl);
             return $sce.trustAsResourceUrl(embedUrl);
-
-            //https://www.youtube.com/embed/AM2Ivdi9c4E
         }
 
         function trustThisContent(html) {

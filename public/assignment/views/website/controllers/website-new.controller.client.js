@@ -9,20 +9,28 @@
 
         var model = this;
         model.userId = $routeParams['userId'];
+        model.website = null;
 
         // event handlers
         model.createWebsite = createWebsite;
 
         function init() {
-            model.websites = websiteService.findAllWebsitesByUser(model.userId);
+            websiteService
+                .findAllWebsitesByUser(model.userId)
+                .then(function(sites) {
+                    model.websites = sites;
+                });
         }
         init();
 
         // implementation
         function createWebsite(website) {
             website.developerId = model.userId;
-            websiteService.createWebsite(website);
-            $location.url('/user/'+model.userId+'/website');
+            websiteService
+                .createWebsite(website)
+                .then(function() {
+                    $location.url('/user/'+model.userId+'/website');
+                });
         }
     }
 })();

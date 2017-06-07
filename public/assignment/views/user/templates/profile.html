@@ -18,6 +18,10 @@
 
 
 <div class="container-fluid">
+
+    <div ng-show="model.message"
+         class="alert alert-info">{{model.message}}</div>
+
     <form>
         <div class="form-group">
             <label id="username-label"
@@ -28,8 +32,23 @@
                    ng-model="model.user.username"/>
         </div>
         <div class="form-group">
+            <label for="pass">Password</label>
+            <input type="password"
+                   ng-model="model.user.password"
+                   class="form-control"
+                   id="pass">
+        </div>
+        <div class="form-group">
+            <label for="upass">Update Password</label>
+            <input type="password"
+                   ng-model="model.user.password"
+                   class="form-control"
+                   id="upass">
+        </div>
+        <div class="form-group">
             <label for="email">Email address</label>
             <input type="email"
+                   ng-model="model.user.email"
                    class="form-control"
                    id="email">
         </div>
@@ -49,6 +68,10 @@
         </div>
     </form>
 
+    <a ng-click="model.updateUser(model.user)"
+       class="btn btn-success btn-block">Update</a>
+    <a ng-click="model.deleteUser(model.user)"
+       class="btn btn-danger btn-block">Delete User</a>
     <a class="btn btn-primary btn-block"
        href="#!/user/{{model.user._id}}/website">Websites</a>
     <a class="btn btn-danger  btn-block"

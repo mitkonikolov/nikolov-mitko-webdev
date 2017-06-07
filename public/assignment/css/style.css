@@ -93,3 +93,10 @@ a:hover {
         margin-left: 33%;
     }
 }
+
+.btn.btn-info {
+    margin-top:5px;
+}
+.btn.btn-danger {
+    margin-top:5px;
+}

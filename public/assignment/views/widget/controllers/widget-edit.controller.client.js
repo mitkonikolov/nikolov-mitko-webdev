@@ -13,17 +13,45 @@
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams['pageId'];
         model.widgetId = $routeParams['widgetId'];
-        model.widget = widgetService.findWidgetById(model.widgetId);
 
         function init() {
-            model.widgets = widgetService.getAllWidgets();
+            widgetService
+                .findWidgetById(model.widgetId)
+                .then(function(wig) {
+                    model.widget = wig;
+                });
+
+            widgetService.findAllWidgetsForPage(model.pageId)
+                .then(function(wigs) {
+                    model.widgets = wigs;
+                });
         }
         init();
 
+        model.updateWidget = updateWidget;
+        model.deleteWidget = deleteWidget;
         model.trustThisContent = trustThisContent;
         model.getYouTubeEmbedUrl = getYouTubeEmbedUrl;
         model.getWidgetUrlForType = getWidgetUrlForType;
         model.switchTo = switchTo;
+
+        function updateWidget(widget) {
+            widgetService
+                .updateWidget(widget._id, widget)
+                .then(function() {
+                    $location.url('/user/' + model.userId + '/website/' + model.websiteId +
+                    '/page/' + model.pageId + '/widget');
+                });
+        }
+
+        function deleteWidget(wid) {
+            widgetService
+                .deleteWidget(wid)
+                .then(function() {
+                    $location.url('/user/' + model.userId + '/website/' + model.websiteId +
+                        '/page/' + model.pageId + '/widget');
+                });
+        }
 
         function getWidgetUrlForType(type) {
             return 'views/widget/templates/widget-'+type.toLowerCase()+'-edit.view.client.html';
@@ -36,8 +64,6 @@
             embedUrl += id;
             console.log(embedUrl);
             return $sce.trustAsResourceUrl(embedUrl);
-
-            //https://www.youtube.com/embed/AM2Ivdi9c4E
         }
 
         function trustThisContent(html) {

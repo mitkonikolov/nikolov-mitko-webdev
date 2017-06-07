@@ -17,37 +17,44 @@
         model.deleteWebsite = deleteWebsite;
 
         function init() {
-            model.websites = websiteService.findAllWebsitesByUser(model.userId);
-            model.website = websiteService.findWebsiteById(model.websiteId);
+            websiteService
+                .findAllWebsitesByUser(model.userId)
+                .then(function(sites) {
+                    model.websites = sites;
+                });
+
+            websiteService
+                .findWebsiteById(model.websiteId)
+                .then(function(site) {
+                    model.website = site;
+                });
         }
         init();
 
         // implementation
         function createWebsite(website) {
             website.developerId = model.userId;
-            websiteService.createWebsite(website);
-            $location.url('/user/'+model.userId+'/website');
+            websiteService
+                .createWebsite(website)
+                .then(function() {
+                    $location.url('/user/'+model.userId+'/website');
+                });
         }
 
         function updateWebsite(website) {
-            websiteService.updateWebsite();
+            websiteService
+                .updateWebsite(website._id, website)
+                .then(function() {
+                    $location.url('/user/'+model.userId+'/website');
+                });
         }
 
         function deleteWebsite(websiteId) {
-            websiteService.deleteWebsite(websiteId);
-            $location.url('/user/'+model.userId+'/website');
-        }
-
-        model.updateHelper = function (name, description) {
-            var website;
-            website.userId = model.userId;
-            website.websiteId = model.websiteId;
-            website.name = name;
-            website.description = description;
-            console.log(website.userId);
-            console.log(website.websiteId);
-            console.log(website.name);
-            console.log(website.description);
+            websiteService
+                .deleteWebsite(websiteId)
+                .then(function(status) {
+                    $location.url('/user/'+model.userId+'/website');
+                });
         }
     }
 })();

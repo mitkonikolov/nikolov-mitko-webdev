@@ -10,7 +10,7 @@
             Edit Page
         </a>
         <p class="navbar-text pull-right">
-            <a href="#!/user/{{model.userId}}/website" class="navbar-link">
+            <a ng-click="model.updatePage(model.page)" class="navbar-link">
           <span class="glyphicon glyphicon-ok wd-glyph">
           </span>
             </a>
@@ -45,19 +45,19 @@
             <input id="name"
                    class="form-control"
                    type="text"
-                   ng-model="name"
-                   placeholder="{{model.pageName}}"/>
+                   ng-model="model.page.name"
+                   placeholder="Page Name"/>
 
             <label for="description">Description</label>
             <textarea id="description"
                       rows="5"
                       class="form-control"
-                      ng-model="description"
-                      placeholder="{{model.pageDescription}}">
+                      ng-model="model.page.description"
+                      placeholder="Page Description">
 
             </textarea>
 
-            <a href="#!/user/{{model.userId}}/website"
+            <a ng-click="model.deletePage(model.page.pageId)"
                class="btn btn-block btn-danger">
                 Delete
             </a>

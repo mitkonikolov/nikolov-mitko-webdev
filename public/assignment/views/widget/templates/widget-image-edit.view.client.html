@@ -1,41 +1,47 @@
 
 
-<div class="col-xs-12 col-sm-8">
+<div>
     <label for="name">Name</label>
     <input id="name"
            class="form-control"
            type="text"
+           ng-model="model.widget.name"
            placeholder="Name"/>
 
     <label for="text">Text</label>
     <input id="text"
            class="form-control"
            type="text"
+           ng-model="model.widget.text"
            placeholder="Text"/>
 
     <label for="url">URL</label>
     <input id="url"
            class="form-control"
            type="url"
-           placeholder="https://www.youtube.com"/>
+           ng-model="model.widget.url"
+           placeholder="Picture URL"/>
 
     <label for="width">Width</label>
     <input id="width"
            class="form-control"
-           type="number"
-           placeholder="3"/>
+           type="text"
+           ng-model="model.widget.width"
+           placeholder="Width"/>
 
-    <label for="file">File Upload</label>
-    <input id="file"
-           multiple
-           type="file"
-           class="form-control"/>
+    <form action="/api/upload"   method="post" enctype="multipart/form-data">
+        <input  name="myFile"    type="file" class="form-control"/>
+        <input  name="width"     value="{{model.widget.width}}" style="display: none"/>
+        <input  name="userId"    value="{{model.userId}}"   style="display: none"/>
+        <input  name="websiteId" value="{{model.websiteId}}"   style="display: none"/>
+        <input  name="pageId"    value="{{model.pageId}}"   style="display: none"/>
+        <input  name="widgetId"  value="{{model.widget._id}}"   style="display: none"/>
+        <button type="submit"    class="btn btn-block btn-primary">Upload Image</button>
+    </form>
 
-    <a class="btn btn-primary btn-block"
-       href="profile.html">Upload image</a>
-
-    <a class="btn btn-block btn-danger"
-       href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget">
-        Delete
+    <a class="btn btn-info btn-block"
+       href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widget._id}}/search">
+        Search
     </a>
+
 </div>

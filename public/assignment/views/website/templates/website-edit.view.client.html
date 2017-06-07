@@ -10,7 +10,7 @@
             Edit Website
         </a>
         <p class="navbar-text pull-right">
-            <a ng-click="model.updateHelper(name, description)" class="navbar-link">
+            <a ng-click="model.updateWebsite(model.website)" class="navbar-link">
           <span class="glyphicon glyphicon-ok wd-glyph">
           </span>
             </a>
@@ -44,17 +44,17 @@
             <input id="name"
                    class="form-control"
                    type="text"
-                   ng-model="name"
+                   ng-model="model.website.name"
                    placeholder="{{model.website.name}}"/>
 
             <label for="description">Description</label>
             <textarea id="description"
                       rows="5"
                       class="form-control"
-                      ng-model="description"
+                      ng-model="model.website.description"
                       placeholder="{{model.website.description}}"></textarea>
 
-            <a href="#!/user/{{model.userId}}/website"
+            <a ng-click="model.deleteWebsite(model.website._id)"
                class="btn btn-block btn-danger">
                 Delete
             </a>

@@ -18,9 +18,28 @@
                 return;
             }
 
-            var found = userService.findUserByUsername(username);
+            /*var found = */
+            userService.findUserByUsername(username)
+                .then(function(response) {
+                    if(response!==null) {
+                        model.error = "Username is not available";
+                    }
+                    else {
+                        var user = {
+                            username: username,
+                            password: password
+                        };
+                        // model.message = user;
+                        userService.createUser(user)
+                            .then(function(user1) {
+                                $location.url('/user/' + user1._id);
+                            });
+                    }
+                });
 
-            if(found !== null) {
+/*            console.log(found);
+
+            if(found.value !== null) {
                 model.error = "Username is not available";
             } else {
                 var user = {
@@ -28,9 +47,11 @@
                     password: password
                 };
                 // model.message = user;
-                userService.createUser(user);
-                $location.url('/user/' + user._id);
-            }
+                userService.createUser(user)
+                    .then(function(user1) {
+                        $location.url('/user/' + user1._id);
+                    });
+            }*/
         }
     }
 })();

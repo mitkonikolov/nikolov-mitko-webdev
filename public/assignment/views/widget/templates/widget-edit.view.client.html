@@ -12,28 +12,40 @@
            href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}">
             Widget Edit
         </a>
+        <p class="navbar-text pull-right">
+            <a ng-click="model.updateWidget(model.widget)"
+               class="navbar-link">
+              <span class="glyphicon glyphicon-ok wd-glyph">
+              </span>
+            </a>
+        </p>
     </div>
 </nav>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-4 hidden-xs srollable-left">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <a ng-click="model.switchTo('HEADING')">Header</a>
-                </li>
-                <li class="list-group-item">
-                    <a ng-click="model.switchTo('IMAGE')">Image</a>
-                </li>
-                <li class="list-group-item">
-                    <a ng-click="model.switchTo('YOUTUBE')">YouTube</a>
-                </li>
-                <li class="list-group-item">
-                    <a ng-click="model.switchTo('HTML')">HTML</a>
-                </li>
-            </ul>
+    <div ng-switch="model.widget.widgetType">
+
+        <div ng-switch-when="HEADING">
+            <div ng-include="'views/widget/templates/widget-heading-edit.view.client.html'"></div>
         </div>
-        <div ng-include="model.getWidgetUrlForType(model.widget.widgetType)">
+
+        <div ng-switch-when="HTML">
+            <div ng-include="'views/widget/templates/widget-html-edit.view.client.html'"></div>
+        </div>
+
+        <div ng-switch-when="IMAGE">
+            <div ng-include="'views/widget/templates/widget-image-edit.view.client.html'"></div>
+        </div>
+
+        <div ng-switch-when="YOUTUBE">
+            <div ng-include="'views/widget/templates/widget-youtube-edit.view.client.html'"></div>
+        </div>
+
+        <div>
+            <a ng-click="model.deleteWidget(model.widget._id)"
+               class="btn btn-danger btn-block">
+                Delete
+            </a>
         </div>
     </div>
 </div>

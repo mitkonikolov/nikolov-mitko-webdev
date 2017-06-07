@@ -13,7 +13,10 @@
         model.pageId = $routeParams['pageId'];
 
         function init() {
-            model.widgets = widgetService.getAllWidgets();
+            widgetService.findAllWidgetsForPage(model.pageId)
+                .then(function(wigs) {
+                    model.widgets = wigs;
+                });
         }
         init();
 
@@ -31,8 +34,6 @@
             var id = youTubeLinkParts[youTubeLinkParts.length - 1];
             embedUrl += id;
             return $sce.trustAsResourceUrl(embedUrl);
-
-            //https://www.youtube.com/embed/AM2Ivdi9c4E
         }
 
         function trustThisContent(html) {

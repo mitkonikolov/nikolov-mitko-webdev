@@ -3,7 +3,7 @@
         .module('WAM')
         .factory('widgetService', widgetService);
     
-    function widgetService() {
+    function widgetService($http) {
 
         var widgets = [
                 { "_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO"},
@@ -31,60 +31,76 @@
 
         return {
             createWidget: createWidget,
-            findWidgetsByPageId: findWidgetsByPageId,
+            findAllWidgetsForPage: findAllWidgetsForPage,
             findWidgetById: findWidgetById,
-            findWidgetByType: findWidgetByType,
             updateWidget: updateWidget,
             deleteWidget: deleteWidget,
-            getAllWidgets: getAllWidgets
+            getAllWidgets: getAllWidgets,
+            findWidgetByType: findWidgetByType,
+            sortWidgets: sortWidgets
         };
-        
-        function createWidget(pageId, widget) {
-            widget._id = pageId;
-            widgets.push(widget);
+
+        function sortWidgets(pageId, startIndex, stopIndex) {
+            console.log("got to sort widgets");
+            var url = '/page/' + pageId + '/widget?initial=' + startIndex + '&final=' + stopIndex;
+            return $http
+                .put(url)
+                .then(function(response) {
+                    console.log(response.data);
+                    return response.data;
+                });
         }
         
-        function findWidgetsByPageId(pageId) {
-            var resultSet = [];
-            for(var w in widgets) {
-                if(widgets[w].pageId === pageId) {
-                    resultSet.push(widgets[w]);
-                }
-            }
-            return resultSet;
+        function createWidget(widget) {
+            var url1 = "/api/page/" + widget.pageId + "/widget";
+            return $http.post(url1, widget)
+                .then(function(response) {
+                    // extract the widget from the response
+                    return response.data;
+                });
+        }
+        
+        function findAllWidgetsForPage(pageId) {
+            var url1 = "/api/page/" + pageId + "/widget";
+            return $http.get(url1)
+                .then(function(response) {
+                    return response.data;
+                });
         }
 
         function findWidgetById(widgetId) {
-            return widgets.find(function (widget) {
-                return widget._id === widgetId;
-            });
+            var url1 = "/api/widget/" + widgetId;
+            return $http.get(url1)
+                .then(function(response) {
+                    return response.data;
+                });
+        }
+        
+        function updateWidget(widgetId, widget) {
+            var url1 = "/api/widget/" + widgetId;
+            console.log(url1);
+            return $http.put(url1, widget)
+                .then(function(response) {
+                    return response.data;
+                });
+        }
+        
+        function deleteWidget(widgetId) {
+            var url1 = "/api/widget/" + widgetId;
+            return $http.delete(url1)
+                .then(function(response) {
+                    return response.data;
+                });
+        }
+
+        function getAllWidgets() {
+            return widgets;
         }
 
         function findWidgetByType(type) {
             return widgets.find(function(widget) {
                 return widget.widgetType = type;
             });
-        }
-        
-        function updateWidget(widgetId, widget) {
-            var widget1 = widgets.find(function (widget1) {
-                return widget1._id === widgetId;
-            });
-            var id = widget1._id;
-            deleteWidget(widget1);
-            createWidget(id, widget);
-        }
-        
-        function deleteWidget(widgetId) {
-            var user = users.find(function (user) {
-                return user._id === userId;
-            });
-            var index = users.indexOf(user);
-            users.splice(index, 1);
-        }
-
-        function getAllWidgets() {
-            return widgets;
         }
     }
 })();
