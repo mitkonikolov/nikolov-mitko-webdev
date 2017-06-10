@@ -4,6 +4,10 @@
 /*var app = require('../express');
 require('../services/user.service.server.js');*/
 var app = require('../express');
+var mongoose = require('mongoose');
+mongoose.Promise = require('q').Promise;
+
+mongoose.connect('mongodb://localhost/webdev_assn');
 
 app.get('/goodbye', sayBye);
 
