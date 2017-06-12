@@ -2,6 +2,8 @@
  * Created by Mitko on 6/3/17.
  */
 var app = require('../express');
+var pageModel = require('../assignment/model/page/page.model.server');
+
 
 var pages = [
     { "_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem1" },
@@ -17,54 +19,52 @@ app.delete('/api/page/:pageId', deletePage);
 
 function createPage(req, res) {
     var page = req.body;
-    page._id = (new Date()).getTime() + "";
-    pages.push(page);
-    res.json(page);
+    var websiteId = req.params.websiteId;
+    pageModel
+        .createPage(websiteId, page)
+        .then(function(writeResult) {
+            res.json(writeResult);
+        });
 }
 
 function findAllPagesForWebsite(req, res) {
     var wid = req.params.websiteId;
-    var resSet = [];
-    for(var p in pages) {
-        if(pages[p].websiteId===wid) {
-            resSet.push(pages[p]);
-        }
-    }
-    res.json(resSet);
+    pageModel
+        .findAllPagesForWebsite(wid)
+        .then(function(pages) {
+            res.json(pages);
+        });
 }
 
 function findPageById(req, res) {
-    var pid = req.params['pageId'];
-    for(var p in pages) {
-        if(pages[p]._id===pid) {
-            res.json(pages[p]);
-            return;
-        }
-    }
-    res.json(null);
+    var pid = req.params.pageId;
+    pageModel
+        .findPageById(pid)
+        .then(function(page) {
+            res.json(page);
+        });
 }
 
 function updatePage(req, res) {
     var page = req.body;
-    var pageId = req.params['pageId'];
-    console.log(pageId);
-
-    for(var p in pages) {
-        if(pages[p]._id === pageId) {
-            pages[p] = page;
+    var pageId = req.params.pageId;
+    pageModel
+        .updatePage(pageId, page)
+        .then(function(writeResult) {
             res.sendStatus(200);
-            return;
-        }
-    }
-    res.sendStatus(404);
+        });
 }
 
 function deletePage(req, res) {
-    var pageId = req.params.pageId;
-    var page = pages.find(function (page) {
-        return page._id === pageId;
-    });
-    var index = pages.indexOf(page);
-    pages.splice(index, 1);
-    res.sendStatus(200);
+    var pageId = req.params['pageId'];
+    pageModel
+        .deletePage(pageId)
+        .then(function(writeResult) {
+            if(writeResult.result.n >=1 ) {
+                res.sendStatus(200);
+            }
+            else {
+                res.sendStatus(404);
+            }
+        });
 }

@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('WAM', ['ngRoute'])
+        .module('WAM', ['ngRoute', 'textAngular'])
         .directive('wdDraggable', wdDraggable);
 
     function wdDraggable($routeParams, widgetService) {
@@ -9,7 +9,6 @@
         var stopIndex = -1;
 
         function linkFunction(scope, element) {
-            console.log("in the linkfunct")
             jQuery(element).sortable({
                 axis: 'y',
                 start:function(event, ui) {

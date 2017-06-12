@@ -36,7 +36,6 @@
             var url1 = url + "/" + userId;
             return $http.put(url1, user)
                 .then(function(response) {
-                    console.log(response);
                     return response.data;
                 });
         }

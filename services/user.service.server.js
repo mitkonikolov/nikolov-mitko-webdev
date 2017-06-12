@@ -42,7 +42,6 @@ function findUserByCredentials(req, res) {
     userModel
         .findUserByCredentials(uname, pass)
         .then(function(user) {
-            console.log("user is " + user);
             res.json(user);
         });
 }
@@ -70,7 +69,7 @@ function updateUser(req, res) {
     var userId = req.params['userId'];
     userModel
         .updateUser(userId, user)
-        .then(function(message){
+        .then(function(object){
             res.sendStatus(200);
         });
 }
@@ -79,7 +78,12 @@ function deleteUser(req, res) {
     var userId = req.params.userId;
     userModel
         .deleteUser(userId)
-        .then(function(status) {
-            res.sendStatus(status);
+        .then(function(writeResult) {
+            if(writeResult.result.n >= 1) {
+                res.sendStatus(200);
+            }
+            else {
+                res.sendStatus(404);
+            }
         });
 }

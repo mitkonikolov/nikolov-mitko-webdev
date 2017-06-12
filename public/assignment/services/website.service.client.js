@@ -25,8 +25,8 @@
         function findAllWebsitesByUser(userId) {
             var url1 = "/api/user/" + userId + "/website";
             return $http.get(url1)
-                .then(function(response) {
-                    return response.data;
+                .then(function(user) {
+                    return user.data;
                 });
         }
 

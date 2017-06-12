@@ -34,14 +34,13 @@
             findAllWidgetsForPage: findAllWidgetsForPage,
             findWidgetById: findWidgetById,
             updateWidget: updateWidget,
-            deleteWidget: deleteWidget,
+            deleteWidget: deleteWidget,/*
             getAllWidgets: getAllWidgets,
-            findWidgetByType: findWidgetByType,
+            findWidgetByType: findWidgetByType,*/
             sortWidgets: sortWidgets
         };
 
         function sortWidgets(pageId, startIndex, stopIndex) {
-            console.log("got to sort widgets");
             var url = '/page/' + pageId + '/widget?initial=' + startIndex + '&final=' + stopIndex;
             return $http
                 .put(url)
@@ -93,7 +92,7 @@
                 });
         }
 
-        function getAllWidgets() {
+/*        function getAllWidgets() {
             return widgets;
         }
 
@@ -101,6 +100,6 @@
             return widgets.find(function(widget) {
                 return widget.widgetType = type;
             });
-        }
+        }*/
     }
 })();

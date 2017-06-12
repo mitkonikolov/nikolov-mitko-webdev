@@ -45,7 +45,6 @@
         }
 
         function updatePage(pageId, page) {
-            console.log(pageId);
             var url1 = "/api/page/" + pageId;
             return $http.put(url1, page)
                 .then(function(response) {
@@ -60,21 +59,5 @@
                     return response.data;
                 });
         }
-
-/*        function getDescription(pageId) {
-            var page = pages.find(function(page) {
-                return page._id===pageId;
-            })
-
-            return page.description;
-        }
-
-        function getName(pageId) {
-            var page = pages.find(function(page) {
-                return page._id===pageId;
-            })
-
-            return page.name;
-        }*/
     }
 })();

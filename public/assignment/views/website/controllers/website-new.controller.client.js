@@ -5,6 +5,7 @@
     
     function websiteNewController($routeParams,
                                   websiteService,
+                                  userService,
                                   $location) {
 
         var model = this;
@@ -26,9 +27,22 @@
         // implementation
         function createWebsite(website) {
             website.developerId = model.userId;
+            var s, u;
+
             websiteService
                 .createWebsite(website)
-                .then(function() {
+                .then(function(newSite) {
+                    s = newSite;
+                    console.log(s);
+                    return userService.findUserById(model.userId);
+                })
+                .then(function(user) {
+                    console.log(user);
+                    user.websites.push(s._id);
+                    console.log(user);
+                    return userService.updateUser(user._id, user);
+                })
+                .then(function(status) {
                     $location.url('/user/'+model.userId+'/website');
                 });
         }

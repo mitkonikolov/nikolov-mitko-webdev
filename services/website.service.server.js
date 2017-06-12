@@ -2,6 +2,7 @@
  * Created by Mitko on 6/3/17.
  */
 var app = require('../express');
+var websiteModel = require('../assignment/model/website/website.model.server');
 
 var websites = [
     { "_id": "123", "name": "Facebook",    "developerId": "456", "description": "Lorem" },
@@ -20,56 +21,53 @@ app.put('/api/website/:websiteId', updateWebsite);
 app.delete('/api/website/:websiteId', deleteWebsite);
 
 function createWebsite(req, res) {
-    var site = req.body;
-    site._id = (new Date()).getTime() + "";
-    websites.push(site);
-    res.json(site);
+    var website = req.body;
+    var userId = req.params.userId;
+    websiteModel
+        .createWebsiteForUser(userId, website)
+        .then(function(writeResult) {
+            res.json(writeResult);
+        });
 }
 
 function findAllWebsitesForUser(req, res) {
     var devId = req.params.userId;
-    var resSet = [];
-    for(var w in websites) {
-        if(websites[w].developerId===devId) {
-            resSet.push(websites[w]);
-        }
-    }
-
-    res.json(resSet);
+    websiteModel
+        .findAllWebsitesForUser(devId)
+        .then(function(sites) {
+            res.json(sites);
+        });
 }
 
 function findWebsiteById(req, res) {
     var sid = req.params['websiteId'];
-    for(var w in websites) {
-        if(websites[w]._id===sid) {
-            res.json(websites[w]);
-            return;
-        }
-    }
-    res.json(null);
+    websiteModel
+        .findWebsiteById(sid)
+        .then(function(site) {
+            res.json(site);
+        });
 }
 
 function updateWebsite(req, res) {
     var site = req.body;
-    console.log(site);
     var siteId = req.params['websiteId'];
-
-    for(var w in websites) {
-        if(websites[w]._id === siteId) {
-            websites[w] = site;
+    websiteModel
+        .updateWebsite(siteId, site)
+        .then(function(writeResult) {
             res.sendStatus(200);
-            return;
-        }
-    }
-    res.sendStatus(404);
+        });
 }
 
 function deleteWebsite(req, res) {
     var siteId = req.params.websiteId;
-    var site = websites.find(function (site) {
-        return site._id === siteId;
-    });
-    var index = websites.indexOf(site);
-    websites.splice(index, 1);
-    res.sendStatus(200);
+    websiteModel
+        .deleteWebsite(siteId)
+        .then(function(writeResult) {
+            if(writeResult.result.n >=1 ) {
+                res.sendStatus(200);
+            }
+            else {
+                res.sendStatus(404);
+            }
+        });
 }

@@ -38,7 +38,8 @@ function updateUser(userId, newUser){
             firstName: newUser.firstName,
             lastName: newUser.lastName,
             email: newUser.email,
-            phone: newUser.phone
+            phone: newUser.phone,
+            websites: newUser.websites
         }
     });
 }

@@ -6,7 +6,8 @@
     function newWidgetController($sce,
                                  $routeParams,
                                  $location,
-                                 widgetService) {
+                                 widgetService,
+                                 pageService) {
 
         var model = this;
         model.userId = $routeParams['userId'];
@@ -23,27 +24,41 @@
 
         function createWidget(type) {
             if(type==='HEADING') {
-                var new_widget = {"_id": "", "widgetType": "",
-                    "pageId": "", "size": 1, "text": "New Header"};
+                var new_widget = {"type": "",
+                    "pageId": "", "size": 1, "rows":1, "text": "New Header"};
             }
             else if(type==='HTML') {
-                var new_widget = {"_id": "", "widgetType": "",
-                    "pageId": "", "text": "<p>New HTML element</p>"};
+                var new_widget = {"type": "",
+                    "pageId": "", "size": 1, "rows":1, "text": "<p>New HTML element</p>"};
+            }
+            else if(type==='TEXT') {
+                var new_widget = {"type": "",
+                    "pageId": "", "size": 1, "rows":1, "text": "Text widget"};
             }
             else {
-                var new_widget = {"_id": "", "widgetType": "",
-                    "pageId": "", "width": "100%", "url": ""};
+                var new_widget = {"type": "",
+                    "pageId": "", "size": 1, "rows":1, "width": "100%", "url": ""};
             }
 
-            new_widget.widgetType = type;
+            new_widget.type = type;
             new_widget.pageId = model.pageId;
 
             widgetService
                 .createWidget(new_widget)
                 .then(function(widg) {
-                    $location.url("/user/" + model.userId + "/website/" + model.websiteId +
-                        "/page/" + model.pageId + "/widget/" + widg._id)
+                    new_widget = widg;
+                    /*$location.url("/user/" + model.userId + "/website/" + model.websiteId +
+                        "/page/" + model.pageId + "/widget/" + widg._id)*/
+                    return pageService.findPageById(model.pageId);
                 })
+                .then(function (p) {
+                    p.widgets.push(new_widget._id);
+                    return pageService.updatePage(p._id, p);
+                })
+                .then(function(status) {
+                    $location.url("/user/" + model.userId + "/website/" + model.websiteId +
+                        "/page/" + model.pageId + "/widget/" + new_widget._id);
+                });
         }
 
         function getWidgetUrlForType(type) {
@@ -55,7 +70,6 @@
             var youTubeLinkParts = youTubeLink.split('/');
             var id = youTubeLinkParts[youTubeLinkParts.length - 1];
             embedUrl += id;
-            console.log(embedUrl);
             return $sce.trustAsResourceUrl(embedUrl);
         }
 

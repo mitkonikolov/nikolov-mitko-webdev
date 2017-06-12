@@ -5,6 +5,7 @@
     
     function newPageController($routeParams,
                                pageService,
+                               websiteService,
                                $location) {
 
         var model = this;
@@ -26,10 +27,19 @@
 
         // implementation
         function createPage(page) {
+            var p;
             page.websiteId = model.websiteId;
             pageService
                 .createPage(page)
-                .then(function() {
+                .then(function(newPage) {
+                    p = newPage;
+                    return websiteService.findWebsiteById(model.websiteId);
+                })
+                .then(function(site) {
+                    site.pages.push(p._id);
+                    return websiteService.updateWebsite(site._id, site);
+                })
+                .then(function(writeMessage) {
                     $location.url('/user/'+ model.userId +
                         '/website/' + model.websiteId + "/page");
                 });

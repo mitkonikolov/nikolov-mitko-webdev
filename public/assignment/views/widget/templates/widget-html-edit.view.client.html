@@ -1,12 +1,28 @@
 
+<div>
+    <div ng-model="model.widget.text"
+         text-angular
+         ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+            ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+            ['indent','outdent'],['html']]">
+    </div>
 
+</div>
+
+<!--
 <div>
     <label for="text">Text</label>
     <input id="text"
            class="form-control"
            type="text"
            ng-model="model.widget.text"
-           placeholder="Text"/>
+           placeholder="Text"
+    &lt;!&ndash;
+           text-angular
+           ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+        ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+        ['indent','outdent'],['html']]"&ndash;&gt;
+    />
 
     <label for="size">Size</label>
     <input id="size"
@@ -14,4 +30,4 @@
            type="number"
            ng-model="model.widget.size"
            placeholder="Size"/>
-</div>
+</div>-->
