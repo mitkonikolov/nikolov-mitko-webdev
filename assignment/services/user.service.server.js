@@ -2,8 +2,8 @@
  * Created by Mitko on 6/3/17.
  */
 
-var app = require('../express');
-var userModel = require('../assignment/model/user/user.model.server');
+var app = require('../../express');
+var userModel = require('../model/user/user.model.server');
 
 var users = [
     {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },

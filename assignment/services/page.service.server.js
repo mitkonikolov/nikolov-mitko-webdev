@@ -1,8 +1,8 @@
 /**
  * Created by Mitko on 6/3/17.
  */
-var app = require('../express');
-var pageModel = require('../assignment/model/page/page.model.server');
+var app = require('../../express');
+var pageModel = require('../model/page/page.model.server');
 
 
 var pages = [

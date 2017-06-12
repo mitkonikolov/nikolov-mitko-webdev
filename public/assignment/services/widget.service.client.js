@@ -77,7 +77,6 @@
         
         function updateWidget(widgetId, widget) {
             var url1 = "/api/widget/" + widgetId;
-            console.log(url1);
             return $http.put(url1, widget)
                 .then(function(response) {
                     return response.data;

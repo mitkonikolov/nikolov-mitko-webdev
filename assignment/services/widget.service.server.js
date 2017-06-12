@@ -1,11 +1,11 @@
 /**
  * Created by Mitko on 6/3/17.
  */
-var app = require('../express');
+var app = require('../../express');
 var multer = require('multer'); // npm install multer --save
-var upload = multer({ dest: __dirname+'/../public/uploads' });
+var upload = multer({ dest: __dirname+'/../../public/uploads' });
 
-var widgetModel = require('../assignment/model/widget/widget.model.server');
+var widgetModel = require('../model/widget/widget.model.server');
 
 
 var widgets = [

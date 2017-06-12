@@ -1,8 +1,8 @@
 /**
  * Created by Mitko on 6/3/17.
  */
-var app = require('../express');
-var websiteModel = require('../assignment/model/website/website.model.server');
+var app = require('../../express');
+var websiteModel = require('../model/website/website.model.server');
 
 var websites = [
     { "_id": "123", "name": "Facebook",    "developerId": "456", "description": "Lorem" },
