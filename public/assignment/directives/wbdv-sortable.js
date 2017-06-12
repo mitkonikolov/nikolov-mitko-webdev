@@ -2,9 +2,9 @@
 (function () {
     angular
         .module('WAM')
-        .directive('wdDraggable', wdDraggable);
+        .directive('wbdvSortable', wbdvSortable);
 
-    function wdDraggable($routeParams, widgetService) {
+    function wbdvSortable($routeParams, widgetService) {
 
         var startIndex = -1;
         var stopIndex = -1;
