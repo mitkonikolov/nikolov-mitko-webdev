@@ -20,7 +20,6 @@
             userService
                 .updateUser(user._id, user)
                 .then(function(response) {
-                    console.log(response);
                     model.message = "User updated."
                 })
         }

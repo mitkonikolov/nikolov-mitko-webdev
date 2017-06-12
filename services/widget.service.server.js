@@ -97,16 +97,6 @@ function deleteWidget(req, res) {
         });
 }
 
-/*function getWidgetById(wid) {
-    for(var w in widgets) {
-        if(widgets[w]._id===wid) {
-            return widgets[w];
-        }
-    }
-    return null;
-}*/
-
-
 function uploadImage(req, res) {
 
     var widgetId      = req.body.widgetId;

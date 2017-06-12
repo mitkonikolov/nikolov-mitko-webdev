@@ -36,22 +36,6 @@
                             });
                     }
                 });
-
-/*            console.log(found);
-
-            if(found.value !== null) {
-                model.error = "Username is not available";
-            } else {
-                var user = {
-                    username: username,
-                    password: password
-                };
-                // model.message = user;
-                userService.createUser(user)
-                    .then(function(user1) {
-                        $location.url('/user/' + user1._id);
-                    });
-            }*/
         }
     }
 })();

@@ -64,31 +64,6 @@
                     $location.url('/user/' + model.userId + '/website/' + model.websiteId +
                         '/page/' + model.pageId + '/widget');
                 });
-/*            var delWidget;
-            widgetService
-                .findWidgetById(wid)
-                .then(function(widget) {
-                    /!*$location.url('/user/' + model.userId + '/website/' + model.websiteId +
-                        '/page/' + model.pageId + '/widget');*!/
-                    delWidget = widget;
-                    return widgetService.deleteWidget(wid);
-                })
-                .then(function(response) {
-                    return pageService.findPageById(delWidget._page);
-                })
-                .then(function(page) {
-                    var w = page.widgets.find(function(w) {
-                        return w._id === wid;
-                    });
-
-                    var i = page.widgets.indexOf(w);
-                    page.widgets.splice(i, 1);
-                    return pageService.updateWidget(w._id, w);
-                })
-                .then(function(status) {
-                    $location.url('/user/' + model.userId + '/website/' + model.websiteId +
-                        '/page/' + model.pageId + '/widget');
-                })*/
         }
 
         function getWidgetUrlForType(type) {

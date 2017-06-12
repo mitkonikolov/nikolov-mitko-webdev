@@ -33,13 +33,10 @@
                 .createWebsite(website)
                 .then(function(newSite) {
                     s = newSite;
-                    console.log(s);
                     return userService.findUserById(model.userId);
                 })
                 .then(function(user) {
-                    console.log(user);
                     user.websites.push(s._id);
-                    console.log(user);
                     return userService.updateUser(user._id, user);
                 })
                 .then(function(status) {
