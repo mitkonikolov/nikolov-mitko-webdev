@@ -30,7 +30,6 @@ function findWidgetById(widgetId) {
 }
 
 function updateWidget(widgetId, widget) {
-    widget.url = widget.url;
     return widgetModel.update({_id: widgetId},
         {
             $set: {

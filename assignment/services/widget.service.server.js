@@ -114,20 +114,25 @@ function uploadImage(req, res) {
     var size          = myFile.size;
     var mimetype      = myFile.mimetype;
 
-    var widget = widgetModel.findWidgetById(widgetId);
-    //widget = {};
-    widget.url = "uploads/" + filename;
-    widget.size = size;
-    widget.rows = 1;
+     widgetModel
+         .findWidgetById(widgetId)
+         .then(function(w) {
+            var widget = w;
+            //widget = {};
+            widget.url = "/uploads/" + filename;
+            widget.size = size;
+            widget.rows = 1;
 
-    widgetModel
-        .updateWidget(widget._id, widget)
-        .then(function(status) {
-            var callbackUrl   = "/assignment/index.html#!/user/" + userId + "/website/" + websiteId +
-                    "/page/" + pageId + "/widget";
+            widgetModel
+                .updateWidget(widget._id, widget)
+                .then(function(status) {
+                    var callbackUrl   = "/assignment/index.html#!/user/" + userId + "/website/" + websiteId +
+                        "/page/" + pageId + "/widget";
 
-            res.redirect(callbackUrl);
-        });
+                    res.redirect(callbackUrl);
+                });
+    });
+
 }
 
 function updateIndex(req, res) {
