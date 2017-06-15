@@ -1,0 +1,49 @@
+<h1>Project Home Page</h1>
+<a class="btn btn-block btn-info"
+   ng-click="model.searchForAllCategories()">Search for all categories of events</a>
+
+<div ng-show="model.categories">
+    <label>Select a Category:</label>
+<div class="row">
+    <div class="col-xs-4" ng-repeat="category in model.categories">
+        <a ng-click="model.getCategoryDetails(category.id)">{{category.title}}</a>
+    </div>
+</div>
+
+<label>Category Description:</label>
+<div class="row">{{model.category.description}}
+</div>
+
+    <div class="input-group">
+        <input ng-model="model.days"
+               type="text"
+               class="form-control"
+               placeholder="Search for the selected event in the last X number of days">
+        <span class="input-group-btn">
+            <a ng-click="model.searchEventInDays(model.days)"
+               class="btn btn-default"
+               type="button">
+                <span class="glyphicon glyphicon-search"></span>
+            </a>
+        </span>
+    </div>
+
+
+
+<div ng-show="model.selectedEvents">
+    <label>Events for the chosen event category in the last {{model.days}} days</label>
+    <div class="row">
+        <div class="col-xs-6" ng-repeat="event in model.selectedEvents">
+            <a ng-click="model.getEventDetails(event.title)">{{event.title}}</a>
+        </div>
+    </div>
+</div>
+
+<div ng-show="model.selectedEvent">
+    <label>Link to further information about the event</label>
+    <div class="row">
+        <a href="{{model.selectedEvent.link}}">{{model.selectedEvent.link}}</a>
+    </div>
+</div>
+
+</div>
