@@ -1,0 +1,36 @@
+
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="#!/user/{{model.userId}}/commitment" class="navbar-link">
+              <span class="glyphicon glyphicon-chevron-left wd-glyph-left">
+              </span>
+            </a>
+        </div>
+        <a class="navbar-brand wd-navbar" href="#!/user/{{model.userId}}/commitment/{{model.commitmentId}}">
+            Commitment Details
+        </a>
+    </div>
+</nav>
+
+
+<div class="container">
+    <ul>
+        <label>Commitment name:</label>
+        <ul class="col-xs-12">{{model.commitment.name}}</ul>
+    </ul>
+
+    <ul>
+        <label>Shareable</label>
+        <ul class="col-xs-12">{{model.commitment.shareable}}</ul>
+    </ul>
+
+    <ul>
+        <label>Users</label>
+        <ul ng-repeat="u in model.commitment.users"
+            class="col-xs-12">
+            <ul class="col-xs-12">{{u.firstName + " " + u.lastName}}</ul>
+        </ul>
+    </ul>
+</div>

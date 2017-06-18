@@ -1,23 +1,14 @@
-/**
- * Created by Mitko on 6/3/17.
- */
 /*var app = require('../express');
 require('../services/user.service.server.js');*/
-var app = require('../express');
+var app = require('../../../express');
 var mongoose = require('mongoose');
 mongoose.Promise = require('q').Promise;
 
-mongoose.connect('mongodb://localhost/webdev_assn');
+mongoose.connect('mongodb://localhost/webdev_proj');
 
 app.get('/goodbye', sayBye);
 
-require('./services/user.service.server.js');
-require('./services/website.service.server.js');
-require('./services/page.service.server.js');
-require('./services/widget.service.server.js');
-
-require('../public/project/services/server/user.service.server');
-require('../public/project/services/server/commitment.service.server');
+require('./user/user.model.server');
 
 function sayBye(req, res) {
     return console.log("bye");

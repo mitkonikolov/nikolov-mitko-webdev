@@ -1,0 +1,68 @@
+
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="#!/user/{{model.userId}}" class="navbar-link">
+              <span class="glyphicon glyphicon-chevron-left wd-glyph-left">
+              </span>
+            </a>
+        </div>
+        <a class="navbar-brand wd-navbar" href="#!/user/{{model.userId}}/commitment/new">
+            All Available Commitments
+        </a>
+<!--        <p class="navbar-text pull-right">
+            <a ng-click="model.createWebsite(model.website)" class="navbar-link">
+          <span class="glyphicon glyphicon-ok wd-glyph">
+          </span>
+            </a>
+        </p>-->
+    </div>
+</nav>
+
+
+<div class="container">
+    <div ng-show="model.message">
+        <div class="alert alert-info">
+            {{model.message}}
+        </div>
+    </div>
+
+    <div ng-show="model.alreadySharingMessage">
+        <div class="alert alert-info">
+            {{model.alreadySharingMessage}}
+        </div>
+    </div>
+
+    <div ng-show="model.commitFirstMessage">
+        <div class="alert alert-success">
+            {{model.commitFirstMessage}}
+        </div>
+    </div>
+
+    <ul class="list-group">
+        <li ng-repeat="commitment in model.allCommitments" class="list-group-item">
+            <div class="row">
+                <div class="col-xs-8">
+                    <a href="#!/user/{{model.userId}}/commitment/{{commitment._id}}">
+                        {{commitment.name}}
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <a ng-click="model.userCommits(commitment)"
+                       class="btn btn-success btn-sm pull-right">
+                        Commit
+                    </a>
+                </div>
+            </div>
+
+            <div class="row">
+                <ul ng-repeat="u in commitment.users">
+                    {{u.firstName + " " + u.lastName + " " + u._id}}
+                    <a class="col-xs-4 pull-right"
+                       ng-click="model.shareWith(u._id, commitment._id)">Share with</a>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>

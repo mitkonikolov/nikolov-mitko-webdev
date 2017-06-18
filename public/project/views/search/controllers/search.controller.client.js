@@ -4,9 +4,9 @@
 (function() {
     angular
         .module('Project')
-        .controller('homeController', homeController);
+        .controller('searchController', searchController);
 
-    function homeController($routeParams,
+    function searchController($routeParams,
                             eonetService,
     $location) {
         var model = this;

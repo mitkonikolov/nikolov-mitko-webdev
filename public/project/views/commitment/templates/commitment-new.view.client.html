@@ -1,0 +1,63 @@
+
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="#!/user/{{model.userId}}" class="navbar-link">
+              <span class="glyphicon glyphicon-chevron-left wd-glyph-left">
+              </span>
+            </a>
+        </div>
+        <a class="navbar-brand wd-navbar" href="#!/user/{{model.userId}}/commitment/new">
+            Create a new commitment
+        </a>
+        <p class="navbar-text pull-right">
+            <a ng-click="model.createCommitment(model.commitment)" class="navbar-link">
+          <span class="glyphicon glyphicon-ok wd-glyph">
+          </span>
+            </a>
+        </p>
+    </div>
+</nav>
+
+
+<div class="container">
+    <div class="row">
+<!--        <div class="col-sm-4 hidden-xs srollable-left">
+            <ul class="list-group">
+                <li ng-repeat="website in model.websites" class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <a href="../../page/page-list.html">
+                                {{website.name}}
+                            </a>
+                        </div>
+                        <div class="col-xs-4">
+                            <a href="#!/user/{{model.userId}}/website/{{website._id}}">
+                                <span class="glyphicon glyphicon-cog pull-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>-->
+        <div class="col-xs-12">
+            <label for="name">Name</label>
+            <input type="text"
+                   id="name"
+                   class="form-control"
+                   placeholder="Name"
+                   ng-model="model.commitment.name"/>
+            <label for="descr">Description</label>
+            <textarea class="form-control"
+                      id="descr"
+                      rows="4"
+                      cols="50"
+                      placeholder="Affected Eco Area"
+                      ng-model="model.commitment.ecoArea"></textarea>
+        </div>
+    </div>
+</div>
+
+
+<div ng-include="'views/common/footer.view.client.html'"></div>
