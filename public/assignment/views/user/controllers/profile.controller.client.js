@@ -9,6 +9,7 @@
         model.userId = $routeParams['userId'];
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
+        model.logout = logout;
 
         userService
             .findUserById(model.userId)
@@ -30,6 +31,14 @@
                 .then(function(response) {
                     $location.url('/login');
                 })
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
     }
 })();

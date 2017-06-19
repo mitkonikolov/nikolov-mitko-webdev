@@ -11,6 +11,13 @@ var userSchema = mongoose.Schema({
 
     websites: [{type: mongoose.Schema.ObjectId, ref: "WebsiteModel"}],
 
+
+    facebook: {
+        id:    String,
+        token: String
+    },
+
+
     dateCreated: Date
 }, {collection: "user"});
 

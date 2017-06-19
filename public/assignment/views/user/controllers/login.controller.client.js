@@ -10,10 +10,10 @@
         model.login = function (username, password) {
 
             userService
-                .findUserByCredentials(username, password)
-                .then(login);
+                .login(username, password)
+                .then(login2);
 
-            function login(found) {
+            function login2(found) {
                 if(found!==null) {
                     $location.url('/user/' + found._id);
                 }
@@ -25,6 +25,14 @@
             function handleError(error) {
                 model.message = "Username " + username + " or password are incorrect, please try again";
             }
+        };
+
+        model.logout = function logout() {
+            userService
+                .logout()
+                .then(function(response) {
+                    $location.url("/");
+                });
         };
     }
 })();

@@ -11,6 +11,9 @@ userModel.findUserByUsername = findUserByUsername;
 userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
 
+userModel.findUserByFacebookId = findUserByFacebookId;
+userModel.updateFacebookToken = updateFacebookToken;
+
 
 module.exports = userModel;
 
@@ -46,4 +49,22 @@ function updateUser(userId, newUser){
 
 function deleteUser(userId){
     return userModel.remove({_id: userId});
+}
+
+function updateFacebookToken(userId, facebookId, token) {
+    var facebook = {
+        id: facebookId,
+        token: token
+    };
+
+    return userModel
+        .update({_id: userId}, {
+            $set : {
+                facebook: facebook
+            }
+        });
+}
+
+function findUserByFacebookId(facebookId) {
+    return userModel.findOne({'facebook.id': facebookId});
 }

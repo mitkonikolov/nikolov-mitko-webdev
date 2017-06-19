@@ -30,7 +30,8 @@
                             password: password
                         };
                         // model.message = user;
-                        userService.createUser(user)
+                        userService
+                            .register(user)
                             .then(function(user1) {
                                 $location.url('/user/' + user1._id);
                             });
