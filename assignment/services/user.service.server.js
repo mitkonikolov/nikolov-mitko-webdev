@@ -7,9 +7,7 @@ var userModel = require('../model/user/user.model.server');
 
 var bcrypt = require("bcrypt-nodejs");
 
-/**
- * Login and Authentication
- */
+// Login & Auth
 var passport      = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
@@ -92,13 +90,8 @@ function deserializeUser(user, done) {
         );
 }
 
-/**
- * End Login and Authentication
- */
 
-/**
- * Facebook Authentication
- */
+// FB Auth
 var FacebookStrategy = require('passport-facebook').Strategy;
 var facebookConfig = {
     clientID     : process.env.FACEBOOK_CLIENT_ID,
@@ -143,16 +136,6 @@ function facebookStrategy(token, refreshToken, profile, done) {
             }
         })
 }
-/**
- * End Facebook Authentication
- */
-
-var users = [
-    {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
-    {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
-    {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
-    {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
-];
 
 app.post("/api/user", createUser);
 app.get("/api/user", findUser);
