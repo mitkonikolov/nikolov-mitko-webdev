@@ -18,6 +18,14 @@
                 controller: 'registerController',
                 controllerAs: 'model'
             })
+            .when("/user", {
+                templateUrl: 'views/user/templates/profile.html',
+                controller: "profileController",
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
             .when('/user/:userId', {
                 templateUrl: 'views/user/templates/profile.html',
                 controller: 'profileController',

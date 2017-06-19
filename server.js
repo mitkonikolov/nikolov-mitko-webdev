@@ -38,7 +38,6 @@ require ("./test/app.js")(app);
 
 require('./assignment/app');
 
-console.log(process.env.PORT);
 var port = (process.env.PORT || 3000);
 
 app.listen(port);
