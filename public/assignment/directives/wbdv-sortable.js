@@ -2,7 +2,14 @@
 (function () {
     angular
         .module('WAM')
-        .directive('wbdvSortable', wbdvSortable);
+        .directive('wbdvSortable', wbdvSortable)
+    .directive('web-dev-hello', sayHello);
+
+    function sayHello() {
+        return {
+            template: "Hello World!"
+        };
+    }
 
     function wbdvSortable($routeParams, widgetService) {
 

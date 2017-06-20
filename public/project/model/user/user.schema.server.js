@@ -1,7 +1,7 @@
 
 var mongoose = require('mongoose');
 
-var userSchemaProj = mongoose.Schema({
+var userSchema = mongoose.Schema({
     username: {type: String, require: true},
     password: {type: String, require: true},
     firstName: String,
@@ -12,6 +12,6 @@ var userSchemaProj = mongoose.Schema({
     commitments: [{type: mongoose.Schema.ObjectId, ref:"CommModelProj"}],
     sharingWith: [{type: mongoose.Schema.Types.Mixed}],
     dateCreated: Date
-}, {collection: "userProj"});
+}, {collection: "user"});
 
-module.exports = userSchemaProj;
+module.exports = userSchema;
