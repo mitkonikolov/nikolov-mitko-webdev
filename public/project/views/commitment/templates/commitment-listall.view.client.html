@@ -29,14 +29,8 @@
     </div>
 
     <div ng-show="model.alreadySharingMessage">
-        <div class="alert alert-info">
-            {{model.alreadySharingMessage}}
-        </div>
-    </div>
-
-    <div ng-show="model.commitFirstMessage">
         <div class="alert alert-success">
-            {{model.commitFirstMessage}}
+            {{model.successCommittingMessage}}
         </div>
     </div>
 
@@ -57,10 +51,7 @@
             </div>
 
             <div class="row">
-                <ul ng-repeat="u in commitment.users">
-                    {{u.firstName + " " + u.lastName + " " + u._id}}
-                    <a class="col-xs-4 pull-right"
-                       ng-click="model.shareWith(u._id, commitment._id)">Share with</a>
+                <ul ng-repeat="c in model.allCommitments">
                 </ul>
             </div>
         </li>

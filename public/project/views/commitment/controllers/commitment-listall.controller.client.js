@@ -6,13 +6,17 @@
     function commitmentListAllController($routeParams,
                                          commitmentService,
                                          userService,
-                                         $location) {
+                                         $location,
+                                         $timeout,
+                                         $q) {
 
         var model = this;
         model.userId = $routeParams['userId'];
 
         model.userCommits = userCommits;
-        model.shareWith = shareWith;
+        // model.getUsersForCommitment = getUsersForCommitment;
+
+        init();
 
         function init() {
             commitmentService
@@ -21,7 +25,6 @@
                     model.allCommitments = response;
                 })
         }
-        init();
 
         function userCommits(commitment) {
             var found = false;
@@ -32,93 +35,48 @@
                 }
             }
 
-            if(found) {
+            if(found) { // the user has already made this commitment
                 model.message = "You have already made this commitment!"
             }
-            else {
-                var u;
-
-                userService
-                    .findUserById(model.userId)
+            else { // the user has not made this commitment just yet
+                commitment.users.push(model.userId);
+                commitmentService
+                    .updateCommitment(model.userId, commitment._id, commitment)
+                    .then(function(response) {
+                        return userService.findUserById(model.userId);
+                    })
                     .then(function(user) {
-                        u=user;
-                        var u1 = {
-                            _id: u._id,
-                            username: u.username,
-                            firstName: u.firstName,
-                            lastName: u.lastName
-                        };
-
-                        commitment.users.push(u1);
-                        return commitmentService.updateCommitment(model.userId, commitment._id, commitment);
+                        user.commitments.push(commitment._id);
+                        return userService.updateUser(model.userId, user);
                     })
                     .then(function(response) {
-                        u.commitments.push(commitment._id);
-                        return userService.updateUser(u._id, u);
-                    })
-                    .then(function(response) {
-                        $location.url('user/' + model.userId);
+                        model.successCommittingMessage = "You successfully committed to the goal!"
                     });
             }
         }
 
-        function shareWith(uid, commitmentId) {
 
-            var found = false;
-            var user1, user2;
 
-            userService
-                .findUserById(model.userId)
-                .then(function(user) {
-                    user1 = user;
 
-                    for(var i=0; i<=user1.commitments.length; i++) {
-                        if(user1.commitments[i] === commitmentId) {
-                            found = true;
-                            break;
-                        }
-                    }
 
-                    if(found) {
-                        var commitment = user1.sharingWith.find(function(commitment) {
-                            return (commitment.userId === uid && commitment.commId === commitmentId);
-                        });
+        /*        function getUsersForCommitment(commitment) {
+         var promises = [];
+         var res = "";
+         for(var i=0; i<commitment.users.length; i++) {
+         promises.push(userService.findUserById(commitment.users[i]));
+         }
 
-                        if(commitment===undefined) {
-                            var comm = {
-                                commId: commitmentId,
-                                userId: uid
-                            };
-                            user1.sharingWith.push(comm);
+         $q.all(promises).then(function(users) {
+         for(i=0; i<users.length; i++) {
+         res = res + users[i].firstName + " " + users[i].lastName + "\n";
+         }
+         });
 
-                            userService
-                                .updateUser(user1._id, user1)
-                                .then(function(response) {
-                                    return userService.findUserById(uid);
-                                })
-                                .then(function(user) {
-                                    user2 = user;
+         return res;
+         }*/
 
-                                    var comm2 = {
-                                        commId: commitmentId,
-                                        userId: model.userId
-                                    };
 
-                                    user2.sharingWith.push(comm2);
-                                    return userService.updateUser(user2._id, user2)
-                                })
-                                .then(function(response) {
-                                    $location.url('user/' + model.userId);
-                                })
-                        }
-                        else {
-                            model.alreadySharingMessage = "You are already sharing this commitment with the selected user."
-                        }
-                    }
-                    else {
-                        model.commitFirstMessage = "Please commit to the task before you share it with another user."
-                    }
-                });
-        }
+
+
     }
 })();

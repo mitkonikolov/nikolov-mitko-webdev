@@ -2,12 +2,13 @@
 var mongoose = require('mongoose');
 
 var userSchema = require('./user.schema.server');
-var userModel = mongoose.model('UserModelProj', userSchema);
+var userModel = mongoose.model('UserModel', userSchema);
 
 userModel.createUser = createUser;
 userModel.findUserById = findUserById;
 userModel.findUserByCredentials = findUserByCredentials;
 userModel.findUserByUsername = findUserByUsername;
+userModel.findAllUsers = findAllUsers;
 userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
 
@@ -31,12 +32,17 @@ function findUserByUsername(uname){
     return userModel.findOne({username: uname});
 }
 
+function findAllUsers() {
+    return userModel.find({});
+}
+
 function updateUser(userId, newUser){
     return userModel.update({_id: userId}, {
         $set: {
             password: newUser.password,
             firstName: newUser.firstName,
             lastName: newUser.lastName,
+            userRole: newUser.userRole,
             publicEmail: newUser.publicEmail,
             email: newUser.email,
             publicCommitments: newUser.publicCommitments,

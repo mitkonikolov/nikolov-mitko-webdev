@@ -16,6 +16,19 @@
 
 
 <div class="container">
+
+    <div ng-show="model.commitFirstMessage">
+        <div class="alert alert-info">
+            {{model.commitFirstMessage}}
+        </div>
+    </div>
+
+    <div ng-show="model.alreadySharingMessage">
+        <div class="alert alert-success">
+            {{model.sharingSuccessfulMessage}}
+        </div>
+    </div>
+
     <ul>
         <label>Commitment name:</label>
         <ul class="col-xs-12">{{model.commitment.name}}</ul>
@@ -28,9 +41,15 @@
 
     <ul>
         <label>Users</label>
-        <ul ng-repeat="u in model.commitment.users"
+        <ul ng-repeat="u in model.committedUsers"
             class="col-xs-12">
-            <ul class="col-xs-12">{{u.firstName + " " + u.lastName}}</ul>
+            <ul class="col-xs-8">
+                {{u.firstName + " " + u.lastName}}
+            </ul>
+            <ul ng-if="model.userId != u._id"
+                class="col-xs-4 pull-right">
+                <a ng-click="model.shareWith(u._id, model.commitment._id)">Share</a>
+            </ul>
         </ul>
     </ul>
 </div>

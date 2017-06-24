@@ -4,6 +4,7 @@ var userModel = require('../../model/user/user.model.server');
 
 app.post("/api/2/user", createUser);
 app.get("/api/2/user", findUser);
+app.get("/api/2/user/findAll", findAllUsers);
 app.get('/api/2/user/:userId', findUserById);
 app.put('/api/2/user/:userId', updateUser);
 app.delete('/api/2/user/:userId', deleteUser);
@@ -24,6 +25,14 @@ function findUser(req, res) {
     else {
         findUserByUsername(req, res);
     }
+}
+
+function findAllUsers(req, res) {
+    userModel
+        .findAllUsers()
+        .then(function(users) {
+            res.json(users)
+        });
 }
 
 function findUserByCredentials(req, res) {

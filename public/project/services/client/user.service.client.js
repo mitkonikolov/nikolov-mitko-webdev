@@ -12,6 +12,8 @@
             findUserByCredentials: findUserByCredentials,
             findUserById: findUserById,
             findUserByUsername: findUserByUsername,
+            findUsernameById: findUsernameById,
+            findAllUsers: findAllUsers,
             updateUser: updateUser,
             deleteUser: deleteUser
         };
@@ -61,6 +63,22 @@
             return $http.get(url1)
                 .then(function(response) {
                     return response.data;
+                });
+        }
+
+        function findAllUsers() {
+            var url1 = url + "/findAll";
+            return $http.get(url1)
+                .then(function(response) {
+                    return response.data;
+                })
+        }
+
+        function findUsernameById(userId) {
+            var url1 = url + "/" + userId;
+            return $http.get(url1)
+                .then(function(response) {
+                    return response.data.username;
                 });
         }
     }

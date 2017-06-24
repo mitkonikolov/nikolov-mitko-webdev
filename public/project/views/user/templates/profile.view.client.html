@@ -74,12 +74,10 @@
                    id="upass">
         </div>
         <div class="form-group">
-            <label for="commitments">Commitments</label>
-            <input readonly
-                   type="text"
-                   ng-model="model.user.commitments"
-                   class="form-control"
-                   id="commitments">
+            <label>Commitments</label>
+            <ul ng-repeat="commitmentName in model.usersCommitments">
+                {{commitmentName}}
+            </ul>
         </div>
         <div class="form-group">
             <label for="publicCommitments">Do you want your commitments to be public?</label>
@@ -90,8 +88,8 @@
         </div>
         <div class="form-group">
             <label>You are sharing commitments with</label>
-            <ul ng-repeat="u in model.user.sharingWith">
-                {{u.userId}}
+            <ul ng-repeat="name in model.usersSharingWith">
+                {{name}}
             </ul>
         </div>
 
@@ -100,11 +98,16 @@
     <a ng-click="model.updateUser(model.user)"
        class="btn btn-success btn-block">Update</a>
     <a ng-click="model.deleteUser(model.user)"
-       class="btn btn-danger btn-block">Delete User</a>
+       class="btn btn-danger btn-block">Delete my account</a>
     <a class="btn btn-primary btn-block"
-       href="#!/user/{{model.user._id}}/commitment">Show commitment</a>
+       href="#!/user/{{model.user._id}}/commitment">My commitments</a>
     <a class="btn btn-primary btn-block"
        href="#!/user/{{model.user._id}}/commitment/new">Create a new commitment</a>
+    <a ng-if="model.user.userRole == 'admin'"
+       class="btn btn-default btn-block"
+       href="#!/user/{{model.user._id}}/manage">Manage Users</a>
+    <a class="btn btn-default btn-block"
+       href="#!/user/{{model.user._id}}/search">Search Natural Events</a>
     <a class="btn btn-danger  btn-block"
        href="#!/login">Logout</a>
 </div>

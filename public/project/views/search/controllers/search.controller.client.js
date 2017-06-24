@@ -7,10 +7,11 @@
         .controller('searchController', searchController);
 
     function searchController($routeParams,
-                            eonetService,
-    $location) {
+                              eonetService,
+                              $location) {
         var model = this;
         model.category;
+        model.userId = $routeParams['userId'];
 
         model.searchForAllCategories = searchForAllCategories;
         model.getCategoryDetails = getCategoryDetails;

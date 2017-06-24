@@ -1,0 +1,64 @@
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="#!/user/{{model.userId}}" class="navbar-link">
+              <span class="glyphicon glyphicon-chevron-left wd-glyph-left">
+              </span>
+            </a>
+        </div>
+        <a class="navbar-brand wd-navbar" href="#!/user/{{model.userId}}/commitment/new">
+            User Management</a>
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+
+    <div ng-show="model.alreadyRoleMessage"
+         class="alert alert-danger">{{model.alreadyRoleMessage}}</div>
+
+    <div ng-show="model.promotedMessage"
+         class="alert alert-success">{{model.promotedMessage}}</div>
+
+    <div ng-show="model.userDeletedMessage"
+         class="alert alert-info">{{model.userDeletedMessage}}</div>
+
+    <div ng-repeat="u in model.allUsers"
+         class="list-group-item col-xs-12">
+        <ul>
+            <ul class="col-xs-6 col-sm-10">Username: {{u.username}}</ul>
+            <ul class="col-xs-6 col-sm-2">
+                <a ng-click="model.changeRole(u, 'admin')">
+                    <span class="btn btn-block btn-sm btn-success">
+                        Make Admin
+                    </span>
+                </a>
+            </ul>
+        </ul>
+
+        <ul>
+            <ul class="col-xs-6 col-sm-10">Name: {{u.firstName + " " + u.lastName}}</ul>
+            <ul class="col-xs-6 col-sm-2">
+                <a ng-click="model.changeRole(u, 'user')">
+                    <span class="btn btn-block btn-sm btn-info">
+                        Demote to User
+                    </span>
+                </a>
+            </ul>
+        </ul>
+
+        <ul>
+            <ul class="col-xs-6 col-sm-10">Role: {{u.userRole}}</ul>
+            <ul class="col-xs-6 col-sm-2">
+                <a ng-click="model.deleteUser(u)">
+                    <span class="btn btn-block btn-sm btn-danger">
+                        Delete
+                    </span>
+                </a>
+            </ul>
+        </ul>
+    </div>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

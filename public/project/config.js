@@ -14,11 +14,6 @@
             .when('/', {
                 templateUrl: './home.html'
             })
-            .when('/search', {
-                templateUrl: 'views/search/templates/search.view.client.html',
-                controller: 'searchController',
-                controllerAs: 'model'
-            })
             .when('/login', {
                 templateUrl: 'views/user/templates/login.view.client.html',
                 controller: 'loginController',
@@ -37,6 +32,16 @@
             .when('/user/:userId/commitment', {
                 templateUrl: 'views/commitment/templates/commitment-listall.view.client.html',
                 controller: 'commitmentListAllController',
+                controllerAs: 'model'
+            })
+            .when('/user/:userId/manage', {
+                templateUrl: 'views/user/templates/manage.view.client.html',
+                controller: 'userManagementController',
+                controllerAs: 'model'
+            })
+            .when('/user/:userId/search', {
+                templateUrl: 'views/search/templates/search.view.client.html',
+                controller: 'searchController',
                 controllerAs: 'model'
             })
             .when('/user/:userId/commitment/new', {
