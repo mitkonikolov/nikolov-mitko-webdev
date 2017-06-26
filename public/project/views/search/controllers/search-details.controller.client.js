@@ -47,7 +47,9 @@
 
                     for(var i = 0; i<model.selectedEvent.categories.length; i++) {
                         for(var p=0; p<response.length; p++) {
-                            if(mySearch(response[p].affectedEcoAreas, model.selectedEvent.categories[i].title)) {
+
+                            if(response[p].affectedEcoAreas!=null &&
+                                mySearch(response[p].affectedEcoAreas, model.selectedEvent.categories[i].title)) {
                                 model.goals.push(response[p].name);
                             }
                         }
