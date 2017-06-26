@@ -23,6 +23,10 @@
         }
 
         function userCommits(commitment) {
+            model.message = null;
+            model.successCommittingMessage = null;
+
+
             var found = false;
             for(var i=0; i<commitment.users.length; i++) {
                 if(commitment.users[i] === model.userId) {
