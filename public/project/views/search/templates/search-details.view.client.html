@@ -31,9 +31,16 @@
 
 
         <div class="form-group">
-            <label>Categories</label>
+            <label>Category</label>
             <ul ng-repeat="category in model.selectedEvent.categories">
                 {{category.title}}
+            </ul>
+        </div>
+
+        <div class="form-group">
+            <label>Goals on our platform that aim to prevent such events</label>
+            <ul ng-repeat="goal in model.goals">
+                {{goal}}
             </ul>
         </div>
 
