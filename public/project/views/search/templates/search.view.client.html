@@ -46,7 +46,8 @@
             </span>
         </div>
 
-
+        <div ng-show="model.noEventsFoundMessage"
+             class="alert alert-danger">{{model.noEventsFoundMessage}}</div>
 
         <div ng-show="model.selectedEvents">
             <label>Events for the chosen event category during the selected number of days</label>

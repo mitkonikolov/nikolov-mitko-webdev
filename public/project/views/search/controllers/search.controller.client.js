@@ -20,6 +20,7 @@
             if(typeof model.userId === 'undefined') {
                 model.userId = "anonymous";
             }
+            model.noEventsFoundMessage = null;
         }
 
         model.searchForAllCategories = searchForAllCategories;
@@ -28,6 +29,7 @@
         model.getEventDetails = getEventDetails;
 
         function searchForAllCategories() {
+            model.noEventsFoundMessage = null;
             eonetService
                 .searchForAllCategories()
                 .then(function(res) {
@@ -36,6 +38,7 @@
         }
 
         function getCategoryDetails(id) {
+            model.noEventsFoundMessage = null;
             var categorie = model.categories.find(function(categorie) {
                 return categorie.id === id;
             });
@@ -44,10 +47,19 @@
         }
 
         function searchEventInDays(days) {
+            model.noEventsFoundMessage = null;
             eonetService
                 .searchEventInDays(model.category.id, days)
                 .then(function(response) {
-                    model.selectedEvents = response.data.events;
+                    if(response.data.events.length > 1) {
+                        model.selectedEvents = response.data.events;
+                    }
+                    else {
+                        model.selectedEvents = null;
+                        model.noEventsFoundMessage = "No events of the selected category were found" +
+                            " in entered number of days in the past. Please change the category, increase the number " +
+                            "or do not input one."
+                    }
                 });
         }
         
