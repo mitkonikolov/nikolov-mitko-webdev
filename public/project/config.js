@@ -62,6 +62,11 @@
                     loggedin: checkLoggedin
                 }
             })
+            .when('/user/search', {
+                templateUrl: 'views/search/templates/search.view.client.html',
+                controller: 'searchController',
+                controllerAs: 'model'
+            })
             .when('/user/:userId', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
                 controller: 'profileController',

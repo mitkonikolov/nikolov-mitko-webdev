@@ -1,10 +1,5 @@
 
 <nav class="navbar navbar-default navbar-fixed-top">
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip('show');
-        })
-    </script>
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#!/user/{{model.user._id}}">
@@ -24,7 +19,7 @@
                        class="navbar-link"
                        data-toggle="tooltip"
                        title="Delete account">
-                        <span class="glyphicon glyphicon-remove">
+                        <span class="glyphicon glyphicon-trash">
                         </span>
                     </a>
                     <a ng-click="model.logout()"
@@ -42,7 +37,7 @@
 </nav>
 
 
-<div class="container-fluid">
+<div class="container-fluid wd-drop col-xs-12 col-sm-6">
 
     <div ng-show="model.message"
          class="alert alert-info">{{model.message}}</div>
@@ -121,7 +116,7 @@
     </form>
 
     <a class="btn btn-primary btn-block"
-       href="#!/user/{{model.user._id}}/commitment">My commitments</a>
+       href="#!/user/{{model.user._id}}/commitment">Show all commitments</a>
     <a class="btn btn-success btn-block"
        href="#!/user/{{model.user._id}}/commitment/new">Create a new commitment</a>
     <a ng-if="model.user.userRole == 'admin'"
@@ -129,6 +124,13 @@
        href="#!/user/{{model.user._id}}/manage">Manage Users</a>
     <a class="btn btn-default btn-block"
        href="#!/user/{{model.user._id}}/search">Search Natural Events</a>
+
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip('show');
+        })
+    </script>
 </div>
 
 <div ng-include="'views/common/footer.view.client.html'"></div>

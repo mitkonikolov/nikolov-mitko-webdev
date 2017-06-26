@@ -5,9 +5,18 @@
         <div class="navbar-footer">
             <p class="navbar-text">
                 <a href="#!/user/{{model.userId}}" class="navbar-link">
-                    <span class="glyphicon glyphicon-user wd-glyph"></span>
+                    <span class="glyphicon glyphicon-user wd-glyph"
+                          data-toggle="tooltip"
+                          data-placement="right"
+                          title="Profile"></span>
                 </a>
             </p>
         </div>
     </div>
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip('show');
+        })
+    </script>
 </nav>
