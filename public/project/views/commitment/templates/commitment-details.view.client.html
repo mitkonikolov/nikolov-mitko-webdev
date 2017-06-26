@@ -77,7 +77,7 @@
             <ul ng-repeat="u in model.committedUsers"
                 class="col-xs-12">
                 <ul class="col-xs-8">
-                    {{u.firstName + " " + u.lastName}}
+                    {{u.firstName + " " + u.lastName + " : " + u.username}}
                 </ul>
                 <ul ng-if="(model.userId != u._id) && model.commitment.shareable"
                     class="col-xs-4 pull-right">

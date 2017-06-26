@@ -60,21 +60,31 @@
                     }
 
                     if(found) { // the current user has already made the commitment (as required to share)
-                        user1.sharingWith.push(uid);
 
-                        userService
-                            .updateUser(user1._id, user1)
-                            .then(function(response) {
-                                return userService.findUserById(uid);
-                            })
-                            .then(function(user) {
-                                user2 = user;
-                                user2.sharingWith.push(model.userId);
-                                return userService.updateUser(user2._id, user2)
-                            })
-                            .then(function(response) {
-                                model.sharingSuccessfulMessage = "Sharing successful!";
-                            });
+                        var res = user1.sharingWith.find(function(res) {
+                           return res === uid;
+                        });
+
+                        if(res) {
+                            model.sharingSuccessfulMessage = "Sharing successful!";
+                        }
+                        else {
+                            user1.sharingWith.push(uid);
+
+                            userService
+                                .updateUser(user1._id, user1)
+                                .then(function (response) {
+                                    return userService.findUserById(uid);
+                                })
+                                .then(function (user) {
+                                    user2 = user;
+                                    user2.sharingWith.push(model.userId);
+                                    return userService.updateUser(user2._id, user2)
+                                })
+                                .then(function (response) {
+                                    model.sharingSuccessfulMessage = "Sharing successful!";
+                                });
+                        }
                     }
                     else { // the user should first make the commitment
                         model.commitFirstMessage = "Please commit to the task before you share it with another user."
