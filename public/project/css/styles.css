@@ -82,7 +82,6 @@ a:hover {
 .wd-videocontainer {
     position: relative;
     padding-bottom:56.25%;
-    /*padding-top:25px;*/
     height:0;
 }
 
@@ -142,4 +141,8 @@ a:hover {
     margin-bottom: 5px;
     margin-right: 0px;
     margin-left: 0px;
+}
+
+.demo-2 .main-title::before {
+font-size: 128px;
 }
