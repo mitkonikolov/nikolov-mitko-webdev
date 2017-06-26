@@ -8,6 +8,11 @@
         var url = "/api/2/user";
 
         return {
+            login: login,
+            logout: logout,
+            register: register,
+            checkLoggedIn: checkLoggedIn,
+            findCurrentUser: findCurrentUser,
             createUser: createUser,
             findUserByCredentials: findUserByCredentials,
             findUserById: findUserById,
@@ -17,6 +22,28 @@
             updateUser: updateUser,
             deleteUser: deleteUser
         };
+
+        function login(user) {
+            return $http.post("/api/login", user)
+                .then(function(response) {
+                    return response.data;
+                });
+        }
+
+        function logout() {
+            return $http.post("/api/logout");
+        }
+
+        function register(user) {
+            return $http.post("/api/register", user);
+        }
+
+        function checkLoggedIn() {
+            return $http.get('/api/loggedin')
+                .then(function (response) {
+                    return response.data;
+                });
+        }
         
         function createUser(user) {
             return $http.post(url, user)
@@ -80,6 +107,13 @@
                 .then(function(response) {
                     return response.data.username;
                 });
+        }
+
+        function findCurrentUser() {
+            return $http.get('/api/currentUser')
+                .then(function (response) {
+                    return response.data;
+                })
         }
     }
 })();

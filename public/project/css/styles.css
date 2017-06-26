@@ -6,8 +6,15 @@ select.form-control {
 }
 
 body {
-    margin-top: 70px;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right:0px;
     margin-bottom: 60px;
+}
+
+.container.demo-2 {
+    padding-right:0px;
+    padding-left:0px;
 }
 
 a:hover {
@@ -15,9 +22,26 @@ a:hover {
 
 }
 
+.wd-glyph-block {
+    position: absolute;
+    top: 15px;
+    /*margin-right: 10px;*/
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    right: 15px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+
 .glyphicon.wd-glyph {
     position: absolute;
     top: 15px;
+    /*margin-right: 10px;*/
     display: inline-block;
     font-family: 'Glyphicons Halflings';
     font-style: normal;
@@ -110,4 +134,8 @@ a:hover {
     margin-bottom: 5px;
     margin-right: 0px;
     margin-left: 0px;
+}
+
+.col-sm-9 {
+    margin-left: -20px;
 }

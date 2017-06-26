@@ -7,8 +7,9 @@
               </span>
             </a>
         </div>
-        <a class="navbar-brand wd-navbar" href="#!/user/{{model.userId}}/commitment/new">
-            User Management</a>
+        <a class="navbar-brand wd-navbar">
+            User Management
+        </a>
     </div>
 </nav>
 
@@ -27,8 +28,10 @@
     <div ng-repeat="u in model.allUsers"
          class="list-group-item col-xs-12">
         <ul>
-            <ul class="col-xs-6 col-sm-10">Username: {{u.username}}</ul>
-            <ul class="col-xs-6 col-sm-2">
+            <a href="#!/user/{{model.userId}}/manage/{{u._id}}">
+                <ul class="col-xs-7 col-sm-9">Username: {{u.username}}</ul>
+            </a>
+            <ul class="col-xs-5 col-sm-3">
                 <a ng-click="model.changeRole(u, 'admin')">
                     <span class="btn btn-block btn-sm btn-success">
                         Make Admin
@@ -38,19 +41,19 @@
         </ul>
 
         <ul>
-            <ul class="col-xs-6 col-sm-10">Name: {{u.firstName + " " + u.lastName}}</ul>
-            <ul class="col-xs-6 col-sm-2">
+            <ul class="col-xs-7 col-sm-9">Name: {{u.firstName + " " + u.lastName}}</ul>
+            <ul class="col-xs-5 col-sm-3">
                 <a ng-click="model.changeRole(u, 'user')">
                     <span class="btn btn-block btn-sm btn-info">
-                        Demote to User
+                        Make User
                     </span>
                 </a>
             </ul>
         </ul>
 
         <ul>
-            <ul class="col-xs-6 col-sm-10">Role: {{u.userRole}}</ul>
-            <ul class="col-xs-6 col-sm-2">
+            <ul class="col-xs-7 col-sm-9">Role: {{u.userRole}}</ul>
+            <ul class="col-xs-5 col-sm-3">
                 <a ng-click="model.deleteUser(u)">
                     <span class="btn btn-block btn-sm btn-danger">
                         Delete

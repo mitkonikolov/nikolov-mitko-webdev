@@ -3,38 +3,61 @@
         .module('Project')
         .controller('registerController', registerController);
 
-    function registerController($location, userService) {
+    function registerController($location,
+                                userService,
+                                $rootScope,
+                                $routeParams) {
         var model = this;
 
         // event handlers
         model.register = register;
 
+        init();
+
+        function init() {
+            model.userType = $routeParams['userType'];
+        }
+
         // implementation
-        function register(username, password, password2) {
+        function register(username, password, password2, secret) {
+            model.error = null;
+            model.wrongSecretMessage = null;
 
             if(password !== password2) {
-                model.error = "Passwords must match";
+                model.error = "The passwords you entered do not match.";
                 return;
             }
 
-            /*var found = */
-            userService.findUserByUsername(username)
+            var user1 = {
+                username: username,
+                password: password,
+                secret: secret
+            };
+
+            if(model.userType==='admin') {
+                user1.userRole = 'admin';
+            }
+            else {
+                user1.userRole = 'user';
+            }
+
+            userService
+                .register(user1)
                 .then(function(response) {
-                    if(response!==null) {
-                        model.error = "Username is not available";
+                    if(response.data.response === "incorrect secret") {
+                        model.wrongSecretMessage = "The secret entered is incorrect. You cannot be registered " +
+                            "as an admin user.";
                     }
                     else {
-                        var user = {
-                            username: username,
-                            password: password
-                        };
-                        // model.message = user;
-                        userService.createUser(user)
-                            .then(function(user1) {
-                                $location.url('/user/' + user1._id);
-                            });
+                        var user = response.data;
+                        $rootScope.currentUser = user;
+                        $location.url("/user/" + user._id);
                     }
+
+                }, function(err) {
+                    console.log(err);
                 });
+
         }
     }
 })();

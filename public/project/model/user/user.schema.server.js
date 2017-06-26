@@ -12,7 +12,12 @@ var userSchema = mongoose.Schema({
     publicCommitments: Boolean,
     commitments: [{type: mongoose.Schema.ObjectId, ref:"CommitmentModel"}],
     sharingWith: [{type: mongoose.Schema.ObjectId, ref:"UserModel"}],
+    facebook: {
+        id:    String,
+        token: String
+    },
     dateCreated: Date
+
 }, {collection: "user"});
 
 module.exports = userSchema;

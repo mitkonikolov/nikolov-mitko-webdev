@@ -9,6 +9,8 @@ userModel.findUserById = findUserById;
 userModel.findUserByCredentials = findUserByCredentials;
 userModel.findUserByUsername = findUserByUsername;
 userModel.findAllUsers = findAllUsers;
+userModel.findUserByFacebookId = findUserByFacebookId;
+userModel.updateFacebookToken = updateFacebookToken;
 userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
 
@@ -35,6 +37,25 @@ function findUserByUsername(uname){
 function findAllUsers() {
     return userModel.find({});
 }
+
+function findUserByFacebookId(facebookId) {
+    return userModel.findOne({'facebook.id': facebookId});
+}
+
+function updateFacebookToken(userId, facebookId, token) {
+    var facebook = {
+        id: facebookId,
+        token: token
+    };
+
+    return userModel
+        .update({_id: userId}, {
+            $set : {
+                facebook: facebook
+            }
+        });
+}
+
 
 function updateUser(userId, newUser){
     return userModel.update({_id: userId}, {

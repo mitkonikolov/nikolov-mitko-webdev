@@ -6,56 +6,85 @@
     function profileController($location, userService, commitmentService, $routeParams, $q) {
 
         var model = this;
-        model.userId = $routeParams['userId'];
         model.updateUser = updateUser;
+        model.logout = logout;
         model.deleteUser = deleteUser;
 
         init();
 
         function init() {
-            userService
-                .findUserById(model.userId)
-                .then(function(user) {
-                    model.user = user;
-                    model.usersSharingWith = [];
-                    model.usersCommitments = [];
-                    var promisesForUsers = [];
-                    var promises = [];
 
-                    for(var i=0; i < model.user.sharingWith.length; i++) {
-                        promisesForUsers.push(userService
-                            .findUsernameById(model.user.sharingWith[i]));
-                    }
+            model.userId = $routeParams['userId'];
 
-                    $q.all(promisesForUsers).then(function(usernames) {
-                        for(k=0; k<usernames.length; k++) {
-                            model.usersSharingWith.push(usernames[k]);
+            if(model.userId) {
+                userService
+                    .findUserById(model.userId)
+                    .then(function (user) {
+                        model.user = user;
+                        model.usersSharingWith = [];
+                        model.usersCommitments = [];
+                        var promisesForUsers = [];
+                        var promises = [];
+
+                        for (var i = 0; i < model.user.sharingWith.length; i++) {
+                            promisesForUsers.push(userService
+                                .findUsernameById(model.user.sharingWith[i]));
                         }
-                    });
 
-                    for(var ind=0; ind<model.user.commitments.length; ind++) {
-                        promises.push(commitmentService
-                            .findCommitmentById(model.userId, model.user.commitments[ind]));
-                    }
-
-                    $q.all(promises).then(function(c) {
-                        if(c[0]!==null) {
-                            for (k = 0; k < c.length; k++) {
-                                model.usersCommitments.push(c[k].name);
+                        $q.all(promisesForUsers).then(function (usernames) {
+                            for (k = 0; k < usernames.length; k++) {
+                                model.usersSharingWith.push(usernames[k]);
                             }
+                        });
+
+                        for (var ind = 0; ind < model.user.commitments.length; ind++) {
+                            promises.push(commitmentService
+                                .findCommitmentById(model.userId, model.user.commitments[ind]));
                         }
-                    }, function(err) {
-                        console.log(err);
+
+                        $q.all(promises).then(function (c) {
+                            if (c[0] !== null) {
+                                for (k = 0; k < c.length; k++) {
+                                    model.usersCommitments.push(c[k].name);
+                                }
+                            }
+                        }, function (err) {
+                            console.log(err);
+                        });
                     });
-                });
+            }
+            else {
+                userService
+                    .findCurrentUser()
+                    .then(handleLoad, handleLoadError);
+            }
         }
 
         function updateUser(user) {
+            model.message = null;
             userService
                 .updateUser(user._id, user)
                 .then(function(response) {
                     model.message = "User updated."
                 })
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function(response) {
+                    $location.url('/');
+                })
+        }
+
+        function handleLoad(user) {
+            model.savedUser = user;
+            model.userId = user._id;
+            model.user = angular.copy(model.savedUser);
+        }
+
+        function handleLoadError(error) {
+            console.log(error);
         }
 
         function deleteUser(user) {
