@@ -65,7 +65,7 @@
             userService
                 .updateUser(user._id, user)
                 .then(function(response) {
-                    model.message = "User updated."
+                    model.message = "You successfully updated your account."
                 })
         }
 

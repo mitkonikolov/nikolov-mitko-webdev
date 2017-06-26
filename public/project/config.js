@@ -5,42 +5,7 @@
         .config(projConf);
 
     function projConf($routeProvider) {
-
-/*        var checkLoggedin = function($q, $timeout, $http, $location, $rootScope) {
-            var deferred = $q.defer();
-            $http.get('/api/loggedin').success(function(user) {
-                $rootScope.errorMessage = null;
-                if (user !== '0') {
-                    console.log("got user");
-                    deferred.resolve(user);
-                } else {
-                    console.log("got error");
-                    deferred.reject();
-                    $location.url('/');
-                }
-            });
-            return deferred.promise;
-        };*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         $routeProvider
-/*            .when('/', {
-                templateUrl: 'views/templates/search.view.client.html',
-                controller: 'homeController',
-                controllerAs: 'model'
-            })*/
             .when('/', {
                 templateUrl: './home.html'
             })
@@ -120,7 +85,6 @@
                 });
             return deferred.promise;
         }
-
     }
 
 })();

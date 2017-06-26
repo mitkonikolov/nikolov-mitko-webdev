@@ -9,28 +9,23 @@
                 <p>
                     <a ng-click="model.updateUser(model.user)"
                        class="navbar-link"
-                       data-toggle="tooltip"
-                       data-placement="right"
                        title="Update">
                       <span class="glyphicon glyphicon-ok">
                       </span>
                     </a>
                     <a ng-click="model.deleteUser(model.user)"
                        class="navbar-link"
-                       data-toggle="tooltip"
                        title="Delete account">
                         <span class="glyphicon glyphicon-trash">
                         </span>
                     </a>
                     <a ng-click="model.logout()"
                        class="navbar-link"
-                       data-toggle="tooltip"
                        title="Log out">
                         <span class="glyphicon glyphicon-log-out">
                         </span>
                     </a>
                 </p>
-
             </div>
         </div>
     </div>
@@ -124,13 +119,6 @@
        href="#!/user/{{model.user._id}}/manage">Manage Users</a>
     <a class="btn btn-default btn-block"
        href="#!/user/{{model.user._id}}/search">Search Natural Events</a>
-
-
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip('show');
-        })
-    </script>
 </div>
 
 <div ng-include="'views/common/footer.view.client.html'"></div>

@@ -8,6 +8,8 @@
 
         var model = this;
         model.userId = $routeParams['userId'];
+        model.findByUsername = findByUsername;
+        model.setToMultiUser = setToMultiUser;
         model.changeRole = changeRole;
         model.deleteUser = deleteUser;
 
@@ -18,7 +20,23 @@
                 .findAllUsers()
                 .then(function(users) {
                     model.allUsers = users;
+                    model.single = false;
                 })
+        }
+
+        function findByUsername(username) {
+            userService
+                .findUserByUsername(username)
+                .then(function(user) {
+                    model.single = true;
+                    model.singleUser = user;
+                });
+        }
+
+        function setToMultiUser() {
+            model.single = false;
+            model.singleUser = null;
+            model.username = null;
         }
 
         function changeRole(user, role) {

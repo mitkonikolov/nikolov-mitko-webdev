@@ -11,6 +11,18 @@
         <a class="navbar-brand wd-navbar" href="#!/user/{{model.userId}}/commitment/{{model.commitmentId}}">
             Commitment Details
         </a>
+
+        <div class="wd-glyph-block">
+            <p>
+                <a ng-click="model.updateCommitment(model.name, model.shareable)"
+                   class="navbar-link"
+                   title="Update">
+                      <span class="glyphicon glyphicon-ok">
+                      </span>
+                </a>
+            </p>
+        </div>
+
     </div>
 </nav>
 
@@ -23,33 +35,59 @@
         </div>
     </div>
 
-    <div ng-show="model.alreadySharingMessage">
+    <div ng-show="model.sharingSuccessfulMessage">
         <div class="alert alert-success">
             {{model.sharingSuccessfulMessage}}
         </div>
     </div>
 
-    <ul>
-        <label>Commitment name:</label>
-        <ul class="col-xs-12">{{model.commitment.name}}</ul>
-    </ul>
+    <div ng-show="model.successUpdateMessage">
+        <div class="alert alert-success">
+            {{model.successUpdateMessage}}
+        </div>
+    </div>
 
-    <ul>
-        <label>Shareable</label>
-        <ul class="col-xs-12">{{model.commitment.shareable}}</ul>
-    </ul>
+    <div ng-show="model.pleaseChangeMessage">
+        <div class="alert alert-info">
+            {{model.pleaseChangeMessage}}
+        </div>
+    </div>
 
-    <ul>
-        <label>Users</label>
-        <ul ng-repeat="u in model.committedUsers"
-            class="col-xs-12">
-            <ul class="col-xs-8">
-                {{u.firstName + " " + u.lastName}}
+
+    <form>
+        <div class="form-group">
+            <label id="commitment-name">Commitment name</label>
+            <input
+                   class="form-control"
+                   ng-model="model.name"
+                   value="model.commitment.name"/>
+        </div>
+
+        <div class="form-group">
+            <label>Shareable</label>
+            <input type="checkbox"
+                   ng-model="model.shareable"
+                   value="model.commitment.shareable"
+                   class="form-control"
+                   id="shareable">
+        </div>
+
+        <div class="form-group">
+            <label>Users</label>
+            <ul ng-repeat="u in model.committedUsers"
+                class="col-xs-12">
+                <ul class="col-xs-8">
+                    {{u.firstName + " " + u.lastName}}
+                </ul>
+                <ul ng-if="(model.userId != u._id) && model.commitment.shareable"
+                    class="col-xs-4 pull-right">
+                    <a ng-click="model.shareWith(u._id, model.commitment._id)">Share</a>
+                </ul>
             </ul>
-            <ul ng-if="model.userId != u._id"
-                class="col-xs-4 pull-right">
-                <a ng-click="model.shareWith(u._id, model.commitment._id)">Share</a>
-            </ul>
-        </ul>
-    </ul>
+        </div>
+    </form>
+
 </div>
+
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

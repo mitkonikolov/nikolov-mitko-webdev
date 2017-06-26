@@ -13,6 +13,7 @@
 
         model.userId = $routeParams['userId'];
         model.commitmentId = $routeParams['commitmentId'];
+        model.updateCommitment = updateCommitment;
 
         function init() {
             commitmentService
@@ -20,6 +21,9 @@
                 .then(function(response) {
                     model.commitment = response;
                     model.committedUsers = [];
+
+                    model.name = model.commitment.name;
+                    model.shareable = model.commitment.shareable;
 
                     var promises = [];
 
@@ -32,7 +36,7 @@
                             model.committedUsers.push(users[i]);
                         }
                     });
-                })
+                });
         }
         init();
 
@@ -65,22 +69,45 @@
                             })
                             .then(function(user) {
                                 user2 = user;
-
                                 user2.sharingWith.push(model.userId);
                                 return userService.updateUser(user2._id, user2)
                             })
                             .then(function(response) {
                                 model.sharingSuccessfulMessage = "Sharing successful!";
-                                $timeout(function() {
-                                    $location.url('user/' + model.userId);
-                                }, 3000);
-
-                            })
+                            });
                     }
                     else { // the user should first make the commitment
                         model.commitFirstMessage = "Please commit to the task before you share it with another user."
                     }
                 });
+        }
+
+
+        function updateCommitment(name, shareable) {
+            model.successUpdateMessage = null;
+            model.pleaseChangeMessage = null;
+
+            if(name===model.commitment.name && shareable === model.commitment.shareable) {
+                model.pleaseChangeMessage = "Please change data before clicking update";
+            }
+            else {
+                var commitment = {
+                    name: name,
+                    shareable: shareable,
+                    users: model.commitment.users
+                };
+
+                commitmentService
+                    .updateCommitment(model.userId, model.commitment._id, commitment)
+                    .then(function (response) {
+                        model.successUpdateMessage = "The commitment was updated successfully!";
+                        return commitmentService.findCommitmentById(model.userId, model.commitmentId)
+                    })
+                    .then(function(commitmentNew) {
+                        model.commitment = commitmentNew;
+                        model.commitment.shareable = commitmentNew.shareable;
+                    })
+            }
         }
 
 

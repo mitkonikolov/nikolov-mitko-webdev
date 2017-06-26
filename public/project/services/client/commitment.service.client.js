@@ -16,7 +16,7 @@
             createCommitment: createCommitment,
             findAllCommitments: findAllCommitments,
             updateCommitment: updateCommitment,
-            findCommitmentById: findCommitmentById
+            findCommitmentById: findCommitmentById,
             /*createWebsite: createWebsite,
             findAllWebsitesByUser: findAllWebsitesByUser,
             findWebsiteById: findWebsiteById,

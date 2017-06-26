@@ -1,7 +1,8 @@
 
 input.form-control,
 textarea.form-control,
-select.form-control {
+select.form-control,
+.input-group{
     margin-bottom: 5px;
 }
 
@@ -145,4 +146,9 @@ a:hover {
 
 .demo-2 .main-title::before {
 font-size: 128px;
+}
+
+.col-xs-7 {
+    padding-left: 0px;
+    margin-left: -15px;
 }

@@ -14,7 +14,6 @@
         model.userId = $routeParams['userId'];
 
         model.userCommits = userCommits;
-        // model.getUsersForCommitment = getUsersForCommitment;
 
         init();
 
@@ -54,29 +53,5 @@
                     });
             }
         }
-
-
-
-
-
-        /*        function getUsersForCommitment(commitment) {
-         var promises = [];
-         var res = "";
-         for(var i=0; i<commitment.users.length; i++) {
-         promises.push(userService.findUserById(commitment.users[i]));
-         }
-
-         $q.all(promises).then(function(users) {
-         for(i=0; i<users.length; i++) {
-         res = res + users[i].firstName + " " + users[i].lastName + "\n";
-         }
-         });
-
-         return res;
-         }*/
-
-
-
-
     }
 })();
