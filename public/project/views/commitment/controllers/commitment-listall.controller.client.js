@@ -11,6 +11,8 @@
         model.userId = $routeParams['userId'];
 
         model.userCommits = userCommits;
+        model.findByEcoArea = findByEcoArea;
+        model.setToMultiGoals = setToMultiGoals;
 
         init();
 
@@ -19,6 +21,7 @@
                 .findAllCommitments()
                 .then(function(response) {
                     model.allCommitments = response;
+                    model.single = false;
                 })
         }
 
@@ -53,6 +56,30 @@
                         model.successCommittingMessage = "You successfully committed to the goal!"
                     });
             }
+        }
+
+        function findByEcoArea(ecoArea) {
+            model.noSuchGoalMessage = null;
+
+            commitmentService
+                .findCommitmentsByArea(ecoArea)
+                .then(function(response) {
+                    if(response.length>0) {
+                        model.single = true;
+                        model.foundGoals = response;
+                    }
+                    else {
+                        model.noSuchGoalMessage = "No goals found. Please make sure to write your criteria " +
+                            "with first capital letter. For example: Drought";
+                    }
+                });
+        }
+
+        function setToMultiGoals() {
+            model.noSuchGoalMessage = null;
+            model.single = false;
+            model.ecoArea = null;
+            model.foundGoals = null;
         }
     }
 })();

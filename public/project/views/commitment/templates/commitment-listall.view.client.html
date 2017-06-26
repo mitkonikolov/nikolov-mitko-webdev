@@ -28,7 +28,34 @@
         </div>
     </div>
 
-    <ul class="list-group">
+
+
+    <div class="input-group">
+        <input ng-model="model.ecoArea"
+               type="text"
+               class="form-control"
+               placeholder="Search by affected eco area">
+        <span class="input-group-btn">
+                <a ng-click="model.setToMultiGoals()"
+                   class="btn btn-default"
+                   type="button">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+                <a ng-click="model.findByEcoArea(model.ecoArea)"
+                   class="btn btn-default"
+                   type="button">
+                    <span class="glyphicon glyphicon-search"></span>
+                </a>
+        </span>
+    </div>
+
+
+    <div ng-show="model.noSuchGoalMessage"
+         class="alert alert-danger">{{model.noSuchGoalMessage}}</div>
+
+
+    <ul ng-if="model.single==false"
+        class="list-group">
         <li ng-repeat="commitment in model.allCommitments" class="list-group-item">
             <div class="row">
                 <div class="col-xs-8">
@@ -45,6 +72,27 @@
             </div>
         </li>
     </ul>
+
+
+    <ul ng-if="model.single==true"
+        class="list-group">
+        <li ng-repeat="commitment in model.foundGoals" class="list-group-item">
+            <div class="row">
+                <div class="col-xs-8">
+                    <a href="#!/user/{{model.userId}}/commitment/{{commitment._id}}">
+                        {{commitment.name}}
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <a ng-click="model.userCommits(commitment)"
+                       class="btn btn-success btn-sm pull-right">
+                        Commit
+                    </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+
 </div>
 
 <div ng-include="'views/common/footer.view.client.html'"></div>

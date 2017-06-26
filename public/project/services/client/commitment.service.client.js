@@ -17,6 +17,7 @@
             findAllCommitments: findAllCommitments,
             updateCommitment: updateCommitment,
             findCommitmentById: findCommitmentById,
+            findCommitmentsByArea: findCommitmentsByArea
             /*createWebsite: createWebsite,
             findAllWebsitesByUser: findAllWebsitesByUser,
             findWebsiteById: findWebsiteById,
@@ -50,6 +51,14 @@
 
         function findCommitmentById(userId, commitmentId) {
             var url1 = url + "/" + userId + "/commitment/" + commitmentId;
+            return $http.get(url1)
+                .then(function(response) {
+                    return response.data;
+                });
+        }
+
+        function findCommitmentsByArea(ecoArea) {
+            var url1 = url + "/commitment/" + ecoArea;
             return $http.get(url1)
                 .then(function(response) {
                     return response.data;

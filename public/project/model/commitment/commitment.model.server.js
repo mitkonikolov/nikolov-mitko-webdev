@@ -7,6 +7,7 @@ var commitmentModel = mongoose.model('CommitmentModel', commitmentSchema);
 commitmentModel.createCommitment = createCommitment;
 commitmentModel.findCommitmentById = findCommitmentById;
 commitmentModel.findAllCommitments = findAllCommitments;
+commitmentModel.findCommitmentsByArea = findCommitmentsByArea;
 commitmentModel.updateCommitment = updateCommitment;
 
 module.exports = commitmentModel;
@@ -21,6 +22,10 @@ function findCommitmentById(commitmentId) {
 
 function findAllCommitments() {
     return commitmentModel.find();
+}
+
+function findCommitmentsByArea(ecoArea) {
+    return commitmentModel.find({affectedEcoAreas: ecoArea});
 }
 
 function updateCommitment(commitmentId, newCommitment){
