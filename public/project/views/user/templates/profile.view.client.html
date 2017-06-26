@@ -115,18 +115,18 @@
 
     <a class="btn btn-primary btn-block"
        href="#!/user/{{model.user._id}}/commitment">Show all goals</a>
-    <a class="btn btn-primary btn-block"
+    <a class="btn btn-info btn-block"
        href="#!/user/{{model.user._id}}/commitment/personal">My goals</a>
     <a class="btn btn-success btn-block"
        href="#!/user/{{model.user._id}}/commitment/new">Create a new commitment</a>
 
-    <a class="btn btn-primary btn-block"
+    <a class="btn btn-danger btn-block"
        href="#!/user/{{model.user._id}}/sharing">Users I am sharing with</a>
 
     <a ng-if="model.user.userRole == 'admin'"
        class="btn btn-default btn-block"
        href="#!/user/{{model.user._id}}/manage">Manage Users</a>
-    <a class="btn btn-default btn-block"
+    <a class="btn btn-success btn-block"
        href="#!/user/{{model.user._id}}/search">Search Natural Events</a>
 </div>
 
