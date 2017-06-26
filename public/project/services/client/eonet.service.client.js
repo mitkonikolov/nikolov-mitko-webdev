@@ -8,6 +8,7 @@
 
     function eonetService($http) {
         this.searchForAllCategories = searchForAllCategories;
+        this.searchEventsByCategory = searchEventsByCategory;
         this.searchEventInDays = searchEventInDays;
         this.searchByTitle = searchByTitle;
 
@@ -15,6 +16,11 @@
 
         function searchForAllCategories() {
             var url = urlBase + "/categories";
+            return $http.get(url);
+        }
+
+        function searchEventsByCategory(categoryID) {
+            var url = urlBase + "/categories/" + categoryID + "?status=closed";
             return $http.get(url);
         }
 

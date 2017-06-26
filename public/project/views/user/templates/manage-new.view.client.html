@@ -1,0 +1,45 @@
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a href="#!/user/{{model.userId}}/manage" class="navbar-link">
+              <span class="glyphicon glyphicon-chevron-left wd-glyph-left">
+              </span>
+            </a>
+        </div>
+        <a class="navbar-brand wd-navbar">
+            Create new user
+        </a>
+
+    </div>
+</nav>
+
+<div class="container-fluid wd-drop col-xs-12 col-sm-6">
+
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+
+    <div ng-show="model.success" class="alert alert-success">
+        {{model.success}}
+    </div>
+
+
+    <label for="username">Username</label>
+    <input id="username"
+           ng-model="username"
+           class="form-control"/>
+
+    <label>Password</label>
+    <input type="password"
+           ng-model="password"
+           class="form-control"/>
+
+    <label>Verify Password</label>
+    <input type="password"
+           ng-model="password2"
+           class="form-control"/>
+
+    <a ng-click="model.register(username, password, password2)"
+       class="btn btn-block btn-primary">Create user</a>
+</div>

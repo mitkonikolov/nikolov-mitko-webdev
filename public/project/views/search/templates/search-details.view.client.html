@@ -12,60 +12,48 @@
     </div>
 </nav>
 
-<!--<div class="container-fluid wd-drop col-xs-12 col-sm-6">
+<div class="container-fluid wd-drop col-xs-12 col-sm-6">
 
-    <a class="btn btn-block btn-info"
-       ng-click="model.searchForAllCategories()">Search for all categories of events</a>
-
-    <div ng-show="model.categories">
-        <label>Select a Category:</label>
-        <div class="row">
-            <div class="col-xs-4" ng-repeat="category in model.categories">
-                <a ng-click="model.getCategoryDetails(category.id)">{{category.title}}</a>
-            </div>
+    <form>
+        <div class="form-group">
+            <label>Title</label>
+            <input readonly
+                   class="form-control"
+                   ng-model="model.selectedEvent.title"/>
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text"
+                   readonly
+                   class="form-control"
+                   ng-model="model.selectedEvent.description">
         </div>
 
-        <label>Category Description:</label>
-        <div class="row">{{model.category.description}}
+
+        <div class="form-group">
+            <label>Categories</label>
+            <ul ng-repeat="category in model.selectedEvent.categories">
+                {{category.title}}
+            </ul>
         </div>
 
-        <label>Searh for this event in the last days:</label>
-        <div class="input-group">
-
-            <input ng-model="model.days"
-                   value = "days"
+        <div class="form-group">
+            <label>Date closed</label>
+            <input readonly
                    type="text"
                    class="form-control"
-                   placeholder="100">
-            <span class="input-group-btn">
-                <a ng-click="model.searchEventInDays(model.days)"
-                   class="btn btn-default"
-                   type="button">
-                    <span class="glyphicon glyphicon-search"></span>
-                </a>
-            </span>
+                   ng-model="model.selectedEvent.closed">
         </div>
 
-
-
-        <div ng-show="model.selectedEvents">
-            <label>Events for the chosen event category during the selected number of days</label>
-            <div class="row">
-                <div class="col-xs-6" ng-repeat="event in model.selectedEvents">
-                    <a ng-click="model.getEventDetails(event.title)">{{event.title}}</a>
-                </div>
-            </div>
+        <div class="form-group">
+            <label>Link to outside website</label>
+            <input readonly
+                   type="text"
+                   class="form-control"
+                   ng-model="model.selectedEvent.link">
         </div>
 
-        <div ng-show="model.selectedEvent">
-            <label>Link to further information about the event</label>
-            <div class="row">
-                <a href="{{model.selectedEvent.link}}">{{model.selectedEvent.link}}</a>
-            </div>
-        </div>
-
-    </div>
-
-</div>-->
+    </form>
+</div>
 
 <div ng-include="'views/common/footer.view.client.html'"></div>

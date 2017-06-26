@@ -10,8 +10,7 @@
                                    eonetService,
                                    $location) {
         var model = this;
-        model.title = $routeParams['title'];
-        model.userId = $routeParams['userId'];
+
 
 /*        model.searchForAllCategories = searchForAllCategories;
         model.getCategoryDetails = getCategoryDetails;
@@ -20,40 +19,23 @@
         init();
 
         function init() {
-            console.log(model.title);
+
+
+            model.categoryId = $routeParams['category'];
+            model.eventTitle = $routeParams['eventTitle'];
+            model.userId = $routeParams['userId'];
+            model.days = $routeParams['days'];
+
             eonetService
-                .searchEventInDays(model.category.id, days)
+                .searchEventInDays(model.categoryId, model.days)
                 .then(function(response) {
                     model.selectedEvents = response.data.events;
+
                     var ev = model.selectedEvents.find(function(ev) {
-                        return ev.title === model.title;
+                        return ev.title === model.eventTitle;
                     });
                     model.selectedEvent = ev;
-                    console.log(model.selectedEvent);
                 });
         }
-
-/*        function searchForAllCategories() {
-            eonetService
-                .searchForAllCategories()
-                .then(function(res) {
-                   model.categories=res.data.categories;
-                });
-        }
-
-        function getCategoryDetails(id) {
-            var categorie = model.categories.find(function(categorie) {
-                return categorie.id === id;
-            });
-            model.category = categorie;
-        }
-
-        function searchEventInDays(days) {
-            eonetService
-                .searchEventInDays(model.category.id, days)
-                .then(function(response) {
-                    model.selectedEvents = response.data.events;
-                });
-        }*/
     }
 })();

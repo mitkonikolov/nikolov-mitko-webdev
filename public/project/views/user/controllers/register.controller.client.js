@@ -28,34 +28,44 @@
                 return;
             }
 
-            var user1 = {
-                username: username,
-                password: password,
-                secret: secret
-            };
-
-            if(model.userType==='admin') {
-                user1.userRole = 'admin';
-            }
-            else {
-                user1.userRole = 'user';
-            }
-
             userService
-                .register(user1)
+                .findUserByUsername(username)
                 .then(function(response) {
-                    if(response.data.response === "incorrect secret") {
-                        model.wrongSecretMessage = "The secret entered is incorrect. You cannot be registered " +
-                            "as an admin user.";
+                    if(response) {
+                        model.error = "This username is already taken";
                     }
                     else {
-                        var user = response.data;
-                        $rootScope.currentUser = user;
-                        $location.url("/user/" + user._id);
-                    }
+                        var user1 = {
+                            username: username,
+                            password: password,
+                            secret: secret
+                        };
 
-                }, function(err) {
-                    console.log(err);
+                        if(model.userType==='admin') {
+                            user1.userRole = 'admin';
+                        }
+                        else {
+                            user1.userRole = 'user';
+                        }
+
+                        userService
+                            .register(user1)
+                            .then(function(response) {
+                                if(response.data.response === "incorrect secret") {
+                                    model.wrongSecretMessage = "The secret entered is incorrect. " +
+                                        "You cannot be registered " +
+                                        "as an admin user.";
+                                }
+                                else {
+                                    var user = response.data;
+                                    $rootScope.currentUser = user;
+                                    $location.url("/user/" + user._id);
+                                }
+
+                            }, function(err) {
+                                console.log(err);
+                            });
+                    }
                 });
 
         }

@@ -68,6 +68,11 @@
                 controller: 'userManagementController',
                 controllerAs: 'model'
             })
+            .when('/user/:userId/manage/new', {
+                templateUrl: 'views/user/templates/manage-new.view.client.html',
+                controller: 'userNewController',
+                controllerAs: 'model'
+            })
             .when('/user/:userId/manage/:userManagedId', {
                 templateUrl: 'views/user/templates/user-details-manage.view.client.html',
                 controller: 'userDetailsController',
@@ -83,7 +88,12 @@
                 controller: 'searchController',
                 controllerAs: 'model'
             })
-            .when('/user/:userId/search/:eventId', {
+            .when('/user/:userId/search/:category/:eventTitle', {
+                templateUrl: 'views/search/templates/search-details.view.client.html',
+                controller: 'searchDetailsController',
+                controllerAs: 'model'
+            })
+            .when('/user/:userId/search/:category/:eventTitle/:days', {
                 templateUrl: 'views/search/templates/search-details.view.client.html',
                 controller: 'searchDetailsController',
                 controllerAs: 'model'

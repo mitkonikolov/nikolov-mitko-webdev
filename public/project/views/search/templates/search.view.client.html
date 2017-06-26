@@ -52,7 +52,7 @@
             <label>Events for the chosen event category during the selected number of days</label>
             <div class="row">
                 <div class="col-xs-6" ng-repeat="event in model.selectedEvents">
-                    <a href="#!/user/{{model.userId}}/search/{{event.id}}">{{event.title}}</a>
+                    <a href="#!/user/{{model.userId}}/search/{{model.categoryId}}/{{event.title}}/{{model.days}}">{{event.title}}</a>
                 </div>
             </div>
         </div>

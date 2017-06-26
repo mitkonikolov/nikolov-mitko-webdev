@@ -8,10 +8,19 @@
 
     function searchController($routeParams,
                               eonetService,
-                              $location) {
+                              $location,
+                              $rootScope) {
         var model = this;
-        model.category;
-        model.userId = $routeParams['userId'];
+
+        init();
+
+        function init() {
+            model.category;
+            model.userId = $routeParams['userId'];
+            if(typeof model.userId === 'undefined') {
+                model.userId = "anonymous";
+            }
+        }
 
         model.searchForAllCategories = searchForAllCategories;
         model.getCategoryDetails = getCategoryDetails;
@@ -31,6 +40,7 @@
                 return categorie.id === id;
             });
             model.category = categorie;
+            model.categoryId = categorie.id;
         }
 
         function searchEventInDays(days) {
@@ -46,6 +56,8 @@
                 return ev.title === title;
             });
             model.selectedEvent = ev;
+            $rootScope.selectedEvent = model.selectedEvent;
+            $location.url("/user/" + model.userId + "/search/details")
         }
     }
 })();

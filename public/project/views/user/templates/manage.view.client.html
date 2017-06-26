@@ -25,6 +25,11 @@
     <div ng-show="model.userDeletedMessage"
          class="alert alert-info">{{model.userDeletedMessage}}</div>
 
+    <a class="input-group btn btn-block btn-success"
+       href="#!/user/{{model.userId}}/manage/new">
+        Create new user
+    </a>
+
     <div class="input-group">
         <input ng-model="model.username"
                type="text"

@@ -30,13 +30,14 @@
                    class="form-control"
                    placeholder="Name"
                    ng-model="model.commitment.name"/>
-            <label for="descr">Description</label>
-            <textarea class="form-control"
-                      id="descr"
-                      rows="4"
-                      cols="50"
-                      placeholder="Affected Eco Area"
-                      ng-model="model.commitment.ecoArea"></textarea>
+            <label>Affected Eco Areas:</label>
+            <ul ng-repeat="area in model.allAreas">
+                <span>{{area.title}}</span>
+                <input type="checkbox"
+                       ng-model="area.status"
+                       class="form-control"
+                       id="publicCommitments">
+            </ul>
         </div>
     </div>
 </div>
