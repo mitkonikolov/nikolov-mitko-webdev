@@ -32,9 +32,22 @@
                 controller: 'searchController',
                 controllerAs: 'model'
             })
+            .when('/user/search/:eventId', {
+                templateUrl: 'views/search/templates/search-details.view.client.html',
+                controller: 'searchDetailsController',
+                controllerAs: 'model'
+            })
             .when('/user/:userId', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
                 controller: 'profileController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedin: checkLoggedin
+                }
+            })
+            .when('/user/:userId/sharing', {
+                templateUrl: 'views/user/templates/sharing.view.client.html',
+                controller: 'sharingController',
                 controllerAs: 'model',
                 resolve: {
                     loggedin: checkLoggedin
@@ -45,19 +58,34 @@
                 controller: 'commitmentListAllController',
                 controllerAs: 'model'
             })
+            .when('/user/:userId/commitment/personal', {
+                templateUrl: 'views/commitment/templates/commitment-personal.view.client.html',
+                controller: 'commitmentPersonalController',
+                controllerAs: 'model'
+            })
             .when('/user/:userId/manage', {
                 templateUrl: 'views/user/templates/manage.view.client.html',
                 controller: 'userManagementController',
                 controllerAs: 'model'
             })
             .when('/user/:userId/manage/:userManagedId', {
-                templateUrl: 'views/user/templates/user-details.view.client.html',
+                templateUrl: 'views/user/templates/user-details-manage.view.client.html',
                 controller: 'userDetailsController',
+                controllerAs: 'model'
+            })
+            .when('/user/:userId/details/:userManagedId', {
+                templateUrl: 'views/user/templates/user-details.view.client.html',
+                controller: 'userAllDetailsController',
                 controllerAs: 'model'
             })
             .when('/user/:userId/search', {
                 templateUrl: 'views/search/templates/search.view.client.html',
                 controller: 'searchController',
+                controllerAs: 'model'
+            })
+            .when('/user/:userId/search/:eventId', {
+                templateUrl: 'views/search/templates/search-details.view.client.html',
+                controller: 'searchDetailsController',
                 controllerAs: 'model'
             })
             .when('/user/:userId/commitment/new', {

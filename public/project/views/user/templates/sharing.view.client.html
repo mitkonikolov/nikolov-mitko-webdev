@@ -8,22 +8,13 @@
             </a>
         </div>
         <a class="navbar-brand wd-navbar">
-            User Management
+            Users sharing with
         </a>
     </div>
 </nav>
 
 
 <div class="container-fluid wd-drop col-xs-12 col-sm-6">
-
-    <div ng-show="model.alreadyRoleMessage"
-         class="alert alert-danger">{{model.alreadyRoleMessage}}</div>
-
-    <div ng-show="model.promotedMessage"
-         class="alert alert-success">{{model.promotedMessage}}</div>
-
-    <div ng-show="model.userDeletedMessage"
-         class="alert alert-info">{{model.userDeletedMessage}}</div>
 
     <div class="input-group">
         <input ng-model="model.username"
@@ -51,38 +42,17 @@
          ng-repeat="u in model.allUsers"
          class="list-group-item col-xs-12">
         <ul>
-            <a href="#!/user/{{model.userId}}/manage/{{u._id}}">
+            <a href="#!/user/{{model.userId}}/details/{{u._id}}">
                 <ul class="col-xs-7 col-sm-7">Username: {{u.username}}</ul>
             </a>
-            <ul class="col-xs-5 col-sm-5">
-                <a ng-click="model.changeRole(u, 'admin')">
-                    <span class="btn btn-block btn-sm btn-success">
-                        Make Admin
-                    </span>
-                </a>
-            </ul>
         </ul>
 
         <ul>
             <ul class="col-xs-7 col-sm-7">Name: {{u.firstName + " " + u.lastName}}</ul>
-            <ul class="col-xs-5 col-sm-5">
-                <a ng-click="model.changeRole(u, 'user')">
-                    <span class="btn btn-block btn-sm btn-info">
-                        Make User
-                    </span>
-                </a>
-            </ul>
         </ul>
 
         <ul>
             <ul class="col-xs-7 col-sm-7">Role: {{u.userRole}}</ul>
-            <ul class="col-xs-5 col-sm-5">
-                <a ng-click="model.deleteUser(u)">
-                    <span class="btn btn-block btn-sm btn-danger">
-                        Delete
-                    </span>
-                </a>
-            </ul>
         </ul>
     </div>
 
@@ -91,38 +61,17 @@
     <div ng-if="model.single==true"
          class="list-group-item col-xs-12">
         <ul>
-            <a href="#!/user/{{model.userId}}/manage/{{model.singleUser._id}}">
+            <a href="#!/user/{{model.userId}}/details/{{model.singleUser._id}}">
                 <ul class="col-xs-7 col-sm-7">Username: {{model.singleUser.username}}</ul>
             </a>
-            <ul class="col-xs-5 col-sm-5">
-                <a ng-click="model.changeRole(model.singleUser, 'admin')">
-                    <span class="btn btn-block btn-sm btn-success">
-                        Make Admin
-                    </span>
-                </a>
-            </ul>
         </ul>
 
         <ul>
             <ul class="col-xs-7 col-sm-7">Name: {{model.singleUser.firstName + " " + model.singleUser.lastName}}</ul>
-            <ul class="col-xs-5 col-sm-5">
-                <a ng-click="model.changeRole(model.singleUser, 'user')">
-                    <span class="btn btn-block btn-sm btn-info">
-                        Make User
-                    </span>
-                </a>
-            </ul>
         </ul>
 
         <ul>
             <ul class="col-xs-7 col-sm-7">Role: {{model.singleUser.userRole}}</ul>
-            <ul class="col-xs-5 col-sm-5">
-                <a ng-click="model.deleteUser(model.singleUser)">
-                    <span class="btn btn-block btn-sm btn-danger">
-                        Delete
-                    </span>
-                </a>
-            </ul>
         </ul>
     </div>
 

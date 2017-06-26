@@ -21,6 +21,7 @@
                     .findUserById(model.userId)
                     .then(function (user) {
                         model.user = user;
+                        model.password2 = model.user.password;
                         model.usersSharingWith = [];
                         model.usersCommitments = [];
                         var promisesForUsers = [];
@@ -62,11 +63,18 @@
 
         function updateUser(user) {
             model.message = null;
-            userService
-                .updateUser(user._id, user)
-                .then(function(response) {
-                    model.message = "You successfully updated your account."
-                })
+            model.wrongPassMessage = null;
+
+            if(model.user.password !== model.password2) {
+                model.wrongPassMessage = "Your passwords do not match";
+            }
+            else {
+                userService
+                    .updateUser(user._id, user)
+                    .then(function (response) {
+                        model.message = "You successfully updated your account."
+                    })
+            }
         }
 
         function logout() {

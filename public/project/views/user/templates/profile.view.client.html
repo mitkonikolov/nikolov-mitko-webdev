@@ -37,6 +37,9 @@
     <div ng-show="model.message"
          class="alert alert-info">{{model.message}}</div>
 
+    <div ng-show="model.wrongPassMessage"
+         class="alert alert-danger">{{model.wrongPassMessage}}</div>
+
     <form>
         <div class="form-group">
             <label id="username-label"
@@ -61,20 +64,6 @@
                    ng-model="model.user.lastName">
         </div>
         <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email"
-                   ng-model="model.user.email"
-                   class="form-control"
-                   id="email">
-        </div>
-        <div class="form-group">
-            <label for="publicEmail">Do you want your email to be public?</label>
-            <input type="checkbox"
-                   ng-model="model.user.publicEmail"
-                   class="form-control"
-                   id="publicEmail">
-        </div>
-        <div class="form-group">
             <label for="pass">Password</label>
             <input type="password"
                    ng-model="model.user.password"
@@ -84,15 +73,23 @@
         <div class="form-group">
             <label for="upass">Confirm Password</label>
             <input type="password"
-                   ng-model="model.user.password"
+                   ng-model="model.password2"
                    class="form-control"
                    id="upass">
         </div>
         <div class="form-group">
-            <label>Commitments</label>
-            <ul ng-repeat="commitmentName in model.usersCommitments">
-                {{commitmentName}}
-            </ul>
+            <label for="publicEmail">Do you want your email to be public?</label>
+            <input type="checkbox"
+                   ng-model="model.user.publicEmail"
+                   class="form-control"
+                   id="publicEmail">
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email"
+                   ng-model="model.user.email"
+                   class="form-control"
+                   id="email">
         </div>
         <div class="form-group">
             <label for="publicCommitments">Do you want your commitments to be public?</label>
@@ -100,6 +97,12 @@
                    ng-model="model.user.publicCommitments"
                    class="form-control"
                    id="publicCommitments">
+        </div>
+        <div class="form-group">
+            <label>Commitments</label>
+            <ul ng-repeat="commitmentName in model.usersCommitments">
+                {{commitmentName}}
+            </ul>
         </div>
         <div class="form-group">
             <label>You are sharing commitments with</label>
@@ -111,9 +114,15 @@
     </form>
 
     <a class="btn btn-primary btn-block"
-       href="#!/user/{{model.user._id}}/commitment">Show all commitments</a>
+       href="#!/user/{{model.user._id}}/commitment">Show all goals</a>
+    <a class="btn btn-primary btn-block"
+       href="#!/user/{{model.user._id}}/commitment/personal">My goals</a>
     <a class="btn btn-success btn-block"
        href="#!/user/{{model.user._id}}/commitment/new">Create a new commitment</a>
+
+    <a class="btn btn-primary btn-block"
+       href="#!/user/{{model.user._id}}/sharing">Users I am sharing with</a>
+
     <a ng-if="model.user.userRole == 'admin'"
        class="btn btn-default btn-block"
        href="#!/user/{{model.user._id}}/manage">Manage Users</a>

@@ -25,15 +25,22 @@
         }
 
         function findByUsername(username) {
+            model.noSuchUserMessage = null;
             userService
                 .findUserByUsername(username)
                 .then(function(user) {
-                    model.single = true;
-                    model.singleUser = user;
+                    if(user) {
+                        model.single = true;
+                        model.singleUser = user;
+                    }
+                    else {
+                        model.noSuchUserMessage = "A user with the provided username was not found."
+                    }
                 });
         }
 
         function setToMultiUser() {
+            model.noSuchUserMessage = null;
             model.single = false;
             model.singleUser = null;
             model.username = null;

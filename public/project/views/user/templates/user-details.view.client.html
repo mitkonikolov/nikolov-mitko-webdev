@@ -5,7 +5,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a href="#!/user/{{model.userId}}/manage" class="navbar-link">
+            <a href="#!/user/{{model.userId}}/sharing" class="navbar-link">
               <span class="glyphicon glyphicon-chevron-left wd-glyph-left">
               </span>
             </a>
@@ -13,16 +13,6 @@
         <a class="navbar-brand wd-navbar">
             User Details
         </a>
-        <div class="wd-glyph-block">
-            <p>
-                <a ng-click="model.updateUser(model.managedUser)"
-                   class="navbar-link"
-                   title="Update">
-                      <span class="glyphicon glyphicon-ok">
-                      </span>
-                </a>
-            </p>
-        </div>
     </div>
 </nav>
 
@@ -44,24 +34,70 @@
         <div class="form-group">
             <label for="first-name">First Name</label>
             <input type="text"
+                   readonly
                    class="form-control"
                    id="first-name"
                    ng-model="model.managedUser.firstName">
         </div>
         <div class="form-group">
             <label for="last-name">Last Name</label>
-            <input type="text"
+            <input readonly
+                   type="text"
                    class="form-control"
                    id="last-name"
                    ng-model="model.managedUser.lastName">
         </div>
+
         <div class="form-group">
+            <label for="userRole">User's role</label>
+            <input readonly
+                   type="text"
+                   class="form-control"
+                   id="userRole"
+                   ng-model="model.managedUser.userRole">
+        </div>
+
+
+        <div class="form-group">
+            <label>Public email</label>
+            <span ng-if="model.managedUser.publicEmail==true"
+                  class="form-control glyphicon glyphicon-check"></span>
+            <span ng-if="model.managedUser.publicEmail==false"
+                  class="form-control glyphicon glyphicon-remove"></span>
+        </div>
+
+        <div ng-if="model.managedUser.publicEmail==true"
+             class="form-group">
             <label for="email">Email address</label>
-            <input type="email"
+            <input readonly
+                   type="email"
                    ng-model="model.managedUser.email"
                    class="form-control"
                    id="email">
         </div>
+
+        <div class="form-group">
+            <label>Public goals</label>
+            <span ng-if="model.managedUser.publicCommitments==true"
+                  class="form-control glyphicon glyphicon-check"></span>
+            <span ng-if="model.managedUser.publicCommitments==false"
+                  class="form-control glyphicon glyphicon-remove"></span>
+        </div>
+
+        <div ng-if="model.managedUser.publicCommitments==true"
+                class="form-group">
+            <label>Commitments</label>
+            <ul ng-repeat="commitmentName in model.managedUsersCommitments">
+                {{commitmentName}}
+            </ul>
+        </div>
+        <div class="form-group">
+            <label>User is sharing goals with</label>
+            <ul ng-repeat="name in model.usersSharingWith">
+                {{name}}
+            </ul>
+        </div>
+
     </form>
 </div>
 

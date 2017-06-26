@@ -5,10 +5,7 @@
     
     function commitmentListAllController($routeParams,
                                          commitmentService,
-                                         userService,
-                                         $location,
-                                         $timeout,
-                                         $q) {
+                                         userService) {
 
         var model = this;
         model.userId = $routeParams['userId'];
