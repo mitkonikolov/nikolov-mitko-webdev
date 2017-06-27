@@ -23,6 +23,11 @@
             model.error = null;
             model.wrongSecretMessage = null;
 
+            if((typeof username === 'undefined') || (typeof password === 'undefined')) {
+                model.error = "Username and password are required.";
+                return;
+            }
+
             if(password !== password2) {
                 model.error = "The passwords you entered do not match.";
                 return;

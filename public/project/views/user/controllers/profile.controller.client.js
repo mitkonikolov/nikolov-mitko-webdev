@@ -63,7 +63,13 @@
 
         function updateUser(user) {
             model.message = null;
+            model.error = null;
             model.wrongPassMessage = null;
+
+            if(model.user.password==="") {
+                model.error = "Your new password cannot be empty.";
+                return;
+            }
 
             if(model.user.password !== model.password2) {
                 model.wrongPassMessage = "Your passwords do not match";

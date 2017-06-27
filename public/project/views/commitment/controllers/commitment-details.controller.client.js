@@ -96,6 +96,12 @@
         function updateCommitment(name, shareable) {
             model.successUpdateMessage = null;
             model.pleaseChangeMessage = null;
+            model.error = null;
+
+            if(name==="") {
+                model.error = "Name of the commitment cannot be empty";
+                return;
+            }
 
             if(name===model.commitment.name && shareable === model.commitment.shareable) {
                 model.pleaseChangeMessage = "Please change data before clicking update";
