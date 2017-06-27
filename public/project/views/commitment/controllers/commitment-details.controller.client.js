@@ -99,7 +99,7 @@
             model.pleaseChangeMessage = null;
             model.error = null;
 
-            if(name==="") {
+            if(!name) {
                 model.error = "Name of the commitment cannot be empty";
                 return;
             }
