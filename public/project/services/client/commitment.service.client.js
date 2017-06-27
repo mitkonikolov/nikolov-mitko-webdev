@@ -18,11 +18,6 @@
             updateCommitment: updateCommitment,
             findCommitmentById: findCommitmentById,
             findCommitmentsByArea: findCommitmentsByArea
-            /*createWebsite: createWebsite,
-            findAllWebsitesByUser: findAllWebsitesByUser,
-            findWebsiteById: findWebsiteById,
-            updateWebsite: updateWebsite,
-            deleteWebsite: deleteWebsite*/
         };
 
         function createCommitment(userId, commitment) {
@@ -66,5 +61,3 @@
         }
     }
 })();
-
-

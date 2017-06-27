@@ -7,9 +7,8 @@
         .controller('searchDetailsController', searchDetailsController);
 
     function searchDetailsController($routeParams,
-                                   eonetService,
-                                   commitmentService,
-                                   $location) {
+                                     eonetService,
+                                     commitmentService) {
         var model = this;
 
         init();

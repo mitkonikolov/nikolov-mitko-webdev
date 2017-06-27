@@ -34,7 +34,6 @@ a:hover {
 .wd-glyph-block {
     position: absolute;
     top: 15px;
-    /*margin-right: 10px;*/
     display: inline-block;
     font-family: 'Glyphicons Halflings';
     font-style: normal;
@@ -45,12 +44,9 @@ a:hover {
     -moz-osx-font-smoothing: grayscale;
 }
 
-
-
 .glyphicon.wd-glyph {
     position: absolute;
     top: 15px;
-    /*margin-right: 10px;*/
     display: inline-block;
     font-family: 'Glyphicons Halflings';
     font-style: normal;

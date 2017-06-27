@@ -4,8 +4,8 @@
         .controller('commitmentNewController', commitmentNewController);
     
     function commitmentNewController($routeParams,
-                                  commitmentService,
-                                  $location) {
+                                     commitmentService,
+                                     $location) {
 
         var model = this;
         model.userId = $routeParams['userId'];

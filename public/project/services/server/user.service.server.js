@@ -7,6 +7,7 @@ var bcrypt = require("bcrypt-nodejs");
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
+// Account Management
 // Passport user serialization
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
@@ -61,7 +62,6 @@ function localStrategy(username, password, done) {
         });
 }
 
-// Loging in and loging out
 app.post('/api/login',passport.authenticate('local'), login);
 app.post('/api/logout', logout);
 app.post ('/api/register', register);
@@ -76,7 +76,6 @@ function logout(req, res) {
     req.logOut();
     res.send(200);
 }
-
 
 function register (req, res) {
     var user = req.body;
@@ -114,16 +113,12 @@ function register (req, res) {
     }
 }
 
-
 function loggedin(req, res) {
     res.send(req.isAuthenticated() ? req.user : '0');
 }
 
 
-
-
-
-// Facebook
+// Facebook integration
 
 var FacebookStrategy = require('passport-facebook').Strategy;
 
@@ -172,13 +167,10 @@ function facebookStrategy(token, refreshToken, profile, done) {
         })
 }
 
-
 function findCurrentUser(req, res) {
     var user = req.user;
     res.json(user);
 }
-
-
 
 
 app.post("/api/2/user", createUser);

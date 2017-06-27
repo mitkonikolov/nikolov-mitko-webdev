@@ -87,7 +87,8 @@
                         }
                     }
                     else { // the user should first make the commitment
-                        model.commitFirstMessage = "Please commit to the task before you share it with another user."
+                        model.commitFirstMessage = "Please commit to the task before " +
+                            "you share it with another user."
                     }
                 });
         }
@@ -103,7 +104,8 @@
                 return;
             }
 
-            if(name===model.commitment.name && shareable === model.commitment.shareable) {
+            if(name===model.commitment.name &&
+                shareable === model.commitment.shareable) {
                 model.pleaseChangeMessage = "Please change data before clicking update";
             }
             else {
